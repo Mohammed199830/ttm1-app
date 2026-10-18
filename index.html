@@ -165,6 +165,143 @@
         @keyframes c4Orbit { from { transform: rotate(0deg) scale(.85); } to { transform: rotate(360deg) scale(1.08); } }
         @keyframes c4FadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes c4FadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+        /* تمديدات وألغاز عالم ألعاب TTM1 */
+        #ttm-games {
+          --gold: #ffd166;
+          --purple: #8158e8;
+          font-family: Tahoma, Arial, sans-serif;
+          color: #fff;
+          max-width: 650px;
+          margin: 15px auto;
+          padding: 16px;
+          border-radius: 22px;
+          background: linear-gradient(145deg, #17152e, #29204b);
+          box-sizing: border-box;
+          direction: rtl;
+          text-align: right;
+        }
+        #ttm-games * { box-sizing: border-box; }
+        #ttm-games button {
+          font: inherit;
+          cursor: pointer;
+          border: 0;
+          border-radius: 12px;
+          padding: 12px;
+          color: #fff;
+          background: #6245bd;
+          transition: transform .15s, opacity .15s;
+        }
+        #ttm-games button:active { transform: scale(.97); }
+        #ttm-games .ttm-header {
+          text-align: center;
+          padding: 14px 4px 22px;
+        }
+        #ttm-games .ttm-logo {
+          width: 72px;
+          height: 72px;
+          display: grid;
+          place-items: center;
+          margin: auto auto 12px;
+          border-radius: 23px;
+          color: #35254e;
+          font-size: 23px;
+          font-weight: bold;
+          background: linear-gradient(135deg, #fff0b2, #e7a92e);
+          box-shadow: 0 0 24px #ffd16633;
+        }
+        #ttm-games h2, #ttm-games h3 { margin: 8px 0; color: #facc15; }
+        #ttm-games p { color: #d2cce9; line-height: 1.8; font-size: 12px; }
+        #ttm-games .ttm-game-list {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+        }
+        #ttm-games .ttm-game-card {
+          min-height: 130px;
+          text-align: center;
+          padding: 18px 8px;
+          border: 1px solid #ffffff18;
+          background: #ffffff0b;
+          border-radius: 18px;
+        }
+        #ttm-games .ttm-game-card .emoji {
+          display: block;
+          font-size: 34px;
+          margin-bottom: 9px;
+        }
+        #ttm-games .ttm-game-card strong { display: block; font-size: 13px; }
+        #ttm-games .ttm-game-card small {
+          display: block;
+          margin-top: 7px;
+          color: #c9c1e4;
+          font-size: 10px;
+        }
+        #ttm-games .ttm-panel {
+          margin-top: 18px;
+          padding: 16px;
+          border-radius: 18px;
+          background: #0f1024;
+          border: 1px solid #ffffff12;
+        }
+        #ttm-games .ttm-hidden { display: none !important; }
+        #ttm-games .ttm-action {
+          width: 100%;
+          margin-top: 10px;
+          background: linear-gradient(100deg, #7352db, #9a55cb);
+        }
+        #ttm-games .ttm-secondary {
+          width: 100%;
+          margin-top: 10px;
+          background: #34314c;
+        }
+        #ttm-games .ttm-answer {
+          width: 100%;
+          margin: 7px 0;
+          text-align: right;
+          background: #292744;
+          border: 1px solid #ffffff16;
+        }
+        #ttm-games .ttm-feedback {
+          min-height: 28px;
+          margin: 12px 0 0;
+          color: var(--gold);
+          font-weight: bold;
+          font-size: 12px;
+          text-align: center;
+        }
+        #ttm-games .ttm-word {
+          text-align: center;
+          font-size: 30px;
+          letter-spacing: 5px;
+          padding: 20px 5px;
+          color: var(--gold);
+          direction: rtl;
+        }
+        #ttm-games .ttm-input {
+          width: 100%;
+          padding: 13px;
+          border: 1px solid #ffffff2b;
+          border-radius: 12px;
+          color: white;
+          background: #22203b;
+          font: inherit;
+          text-align: center;
+        }
+        #ttm-games .ttm-memory-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 9px;
+        }
+        #ttm-games .ttm-memory-card {
+          aspect-ratio: 1;
+          font-size: 27px !important;
+          background: #3b3064 !important;
+        }
+        #ttm-games .ttm-memory-card:disabled {
+          opacity: .7;
+          cursor: default;
+        }
     </style>
 </head>
 <body>
@@ -198,13 +335,6 @@
 
     <div id="mainScreen" class="screen-page">
         <div style="text-align:center"><button id="adminPanelMainBtn" class="admin-badge" onclick="openAdminPanelModal()">👑 لوحة تحكم الإدارة الخاصة</button></div>
-        <div id="agentChargingCard" class="card" style="display:none;border:1px solid #38bdf8">
-            <h4 style="margin:0 0 4px 0;color:#38bdf8;font-size:13px">⚡ حقيبة الوكيل: شحن نقاط المستخدمين</h4>
-            <div style="font-size:11px;color:#c084fc;margin-bottom:8px;font-weight:bold">رصيد حقيبتك الحاضر: <span id="agentBagBalance">0</span> نقطة</div>
-            <input type="text" id="agentTargetIdInput" class="input-box" placeholder="أدخل ID المستخدم (أرقام فقط)">
-            <input type="number" id="agentPointsAmountInput" class="input-box" placeholder="عدد النقاط المراد شحنها">
-            <button class="action-btn btn-blue" onclick="agentChargeUserPoints()">شحن النقاط للمستخدم من الحقيبة 🚀</button>
-        </div>
         <div class="new-header-bar">
             <div style="display:flex;align-items:center">
                 <button class="top-logout-btn" onclick="handleLogout()"><span>خروج</span> 🚪</button>
@@ -266,7 +396,7 @@
         <div class="grid-buttons-custom">
             <div class="grid-btn-item" onclick="openWithdrawModal()"><div class="icon-circle">💸</div><span>سحب الأرباح</span><div class="mini-arrow">⌄</div></div>
             <div class="grid-btn-item" onclick="navigateTo('leaderboardScreen')"><div class="icon-circle">🏆</div><span>التصنيف الأسبوعي</span><div class="mini-arrow">⌄</div></div>
-            <div class="grid-btn-item" onclick="navigateTo('agentsScreen')"><div class="icon-circle">⚡</div><span>الحدث المفاجئ</span><div class="mini-arrow">⌄</div></div>
+            <div class="grid-btn-item" onclick="navigateTo('agentsScreen')"><div class="icon-circle">🎮</div><span>ألعاب TTM1</span><div class="mini-arrow">⌄</div></div>
         </div>
         <div class="bottom-nav-bar">
             <button class="bottom-nav-item active" onclick="navigateTo('mainScreen')"><span>🏠</span><div>الرئيسية</div></button>
@@ -320,109 +450,46 @@
         </div>
     </div>
 
-    <!-- شاشة الحدث المفاجئ المستقلة (بديلة الوكلاء) -->
+    <!-- شاشة ألعاب TTM1 للتسلية بديلة الوكلاء -->
     <div id="agentsScreen" class="screen-page">
         <div class="top-nav">
-            <h3 style="margin:0;color:#facc15;font-size:15px">⚡ الحدث المفاجئ TTM1</h3>
+            <h3 style="margin:0;color:#facc15;font-size:15px">🎮 ألعاب TTM1 للتسلية</h3>
             <button class="nav-btn back" onclick="navigateTo('mainScreen')">⬅️ الرئيسية</button>
         </div>
         
-        <!-- وحدة الحدث المفاجئ المستقلة تماماً -->
-        <div id="ttm1-independent-event-wrapper" style="direction:rtl; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 10px 0;">
-            <style>
-                .ttm-event-card {
-                    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-                    border: 1px solid rgba(234, 179, 8, 0.4);
-                    border-radius: 18px;
-                    padding: 15px;
-                    color: #fff;
-                    box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 15px rgba(234, 179, 8, 0.15);
-                    position: relative;
-                    overflow: hidden;
-                }
-                .ttm-event-header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 10px;
-                }
-                .ttm-event-title {
-                    font-size: 14px;
-                    font-weight: 900;
-                    color: #facc15;
-                    display: flex;
-                    align-items: center;
-                    gap: 6px;
-                }
-                .ttm-event-badge {
-                    background: rgba(234, 179, 8, 0.2);
-                    border: 1px solid #facc15;
-                    color: #facc15;
-                    padding: 2px 8px;
-                    border-radius: 10px;
-                    font-size: 10px;
-                    font-weight: bold;
-                }
-                .ttm-event-btn {
-                    width: 100%;
-                    padding: 10px;
-                    background: linear-gradient(135deg, #eab308, #ca8a04);
-                    color: #0f172a;
-                    border: none;
-                    border-radius: 12px;
-                    font-weight: 800;
-                    font-size: 12px;
-                    cursor: pointer;
-                    box-shadow: 0 4px 12px rgba(234, 179, 8, 0.4);
-                    transition: 0.2s;
-                }
-                .ttm-event-btn:active { transform: scale(0.98); }
-                #ttm-game-modal-area {
-                    display: none;
-                    margin-top: 10px;
-                    background: rgba(2, 6, 23, 0.95);
-                    border: 1px solid rgba(234, 179, 8, 0.3);
-                    border-radius: 14px;
-                    padding: 12px;
-                    text-align: center;
-                }
-                .ttm-code-box {
-                    font-family: monospace;
-                    font-size: 18px;
-                    letter-spacing: 4px;
-                    background: rgba(30, 41, 59, 0.9);
-                    padding: 10px;
-                    border-radius: 8px;
-                    color: #38bdf8;
-                    margin: 8px 0;
-                    border: 1px dashed rgba(56, 189, 248, 0.4);
-                }
-            </style>
+        <div id="ttm-games">
+          <header class="ttm-header">
+            <div class="ttm-logo">TTM1</div>
+            <h2>🎮 عالم ألعاب TTM1</h2>
+            <p>استمتع بالألغاز والألعاب الخفيفة، والعب على راحتك ❤️</p>
+          </header>
 
-            <div class="ttm-event-card">
-                <div class="ttm-event-header">
-                    <div class="ttm-event-title">
-                        <span>⚡</span> الحدث المفاجئ TTM1
-                    </div>
-                    <div id="ttm-event-status-badge" class="ttm-event-badge">بانتظار الانطلاق</div>
-                </div>
-                <p style="font-size: 11px; color: #94a3b8; margin: 0 0 10px 0;">
-                    لعبة «اقلب الشفرة»: رتب الأرقام وافوز بجواهر فورية (أول 3 فائزين فقط).
-                </p>
-                <button class="ttm-event-btn" onclick="ttmOpenEventGame()">دخول التحدي المفاجئ 🚀</button>
+          <div class="ttm-game-list">
+            <button class="ttm-game-card" data-game="words">
+              <span class="emoji">🔤</span>
+              <strong>لخبط الحروف</strong>
+              <small>اكتشف الكلمة الصحيحة</small>
+            </button>
+            <button class="ttm-game-card" data-game="riddles">
+              <span class="emoji">😂</span>
+              <strong>فوازير وألغاز</strong>
+              <small>فكر واكتشف الجواب</small>
+            </button>
+            <button class="ttm-game-card" data-game="memory">
+              <span class="emoji">🃏</span>
+              <strong>افتح وتذكّر</strong>
+              <small>طابق الصور المتشابهة</small>
+            </button>
+          </div>
 
-                <div id="ttm-game-modal-area">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <b style="color: #facc15; font-size: 12px;">🧠 اقلب الشفرة – TTM1</b>
-                        <button onclick="ttmCloseEventGame()" style="background:none; border:none; color:#ef4444; font-size:14px; cursor:pointer;">✖</button>
-                    </div>
-                    <div id="ttm-game-instruction" style="font-size: 11px; color: #cbd5e1; margin-bottom: 6px;">احفظ الشفرة جيداً قبل اختفائها!</div>
-                    <div id="ttm-code-display" class="ttm-code-box">---</div>
-                    <input type="text" id="ttm-user-input" class="input-box" placeholder="أدخل الشفرة المرتبة هنا..." style="display:none; text-align:center; font-family:monospace; margin-bottom:8px;">
-                    <button id="ttm-action-game-btn" class="ttm-event-btn" onclick="ttmStartGameRound()">ابدأ الجولة 🎮</button>
-                    <div id="ttm-game-result-msg" style="margin-top: 8px; font-size: 11px; font-weight: bold;"></div>
-                </div>
-            </div>
+          <section id="ttm-game-panel" class="ttm-panel ttm-hidden">
+            <h3 id="ttm-game-title">اللعبة</h3>
+            <p id="ttm-game-description"></p>
+            <div id="ttm-game-content"></div>
+            <p id="ttm-game-feedback" class="ttm-feedback" aria-live="polite"></p>
+            <button id="ttm-game-next" class="ttm-action ttm-hidden">جولة جديدة 🔄</button>
+            <button id="ttm-game-back" class="ttm-secondary">رجوع إلى الألعاب</button>
+          </section>
         </div>
     </div>
 
@@ -491,7 +558,6 @@
             <input type="text" id="profileNameInput" class="input-box" placeholder="تعديل الاسم" style="margin-top:4px;margin-bottom:6px">
             <input type="text" id="profileBioInput" class="input-box" placeholder="اكتب البايو الخاص بك (60 حرف كحد أقصى)" maxlength="60" oninput="validateBioLength(this)" style="margin-top:2px;margin-bottom:6px;font-size:11px">
             <div id="bioCounter" style="font-size:9px;color:#94a3b8;text-align:left;margin-bottom:6px">0 / 60</div>
-            <div id="agentStatusBadge" style="margin-top:4px;display:none"><span style="background:rgba(56,189,248,0.2);border:1px solid #38bdf8;color:#38bdf8;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:bold">⭐ وكيل معتمد</span></div>
             <div style="margin-top:8px;text-align:right"><button class="action-btn btn-gold" onclick="saveProfileData()">حفظ التعديلات 💾</button></div>
             <div class="profile-gifts-section">
                 <h4 style="margin:0 0 6px 0;color:#c084fc;font-size:12px">🎁 هدايا الملف الشخصي المستلمة</h4>
@@ -590,13 +656,10 @@
             <button style="background:none;border:none;color:#ef4444;font-size:18px;cursor:pointer" onclick="closeAdminPanelModal()">✖</button>
         </div>
         <div style="background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.3);padding:10px;border-radius:10px;margin-bottom:10px">
-            <h4 style="margin:0 0 6px 0;color:#38bdf8;font-size:12px">⚡ شحن النقاط أو حقيبة الوكيل مباشرة</h4>
-            <input type="text" id="adminTargetIdInput" class="input-box" placeholder="أدخل ID المستخدم أو الوكيل (أرقام فقط)" style="margin-bottom:6px">
+            <h4 style="margin:0 0 6px 0;color:#38bdf8;font-size:12px">⚡ شحن النقاط المباشر</h4>
+            <input type="text" id="adminTargetIdInput" class="input-box" placeholder="أدخل ID المستخدم (أرقام فقط)" style="margin-bottom:6px">
             <input type="number" id="adminPointsAmountInput" class="input-box" placeholder="عدد النقاط" style="margin-bottom:6px">
-            <div style="display:flex;gap:6px">
-                <button class="action-btn btn-gold" style="padding:8px;font-size:11px" onclick="adminChargeDirectUser()">شحن النقاط 🪙</button>
-                <button class="action-btn btn-blue" style="padding:8px;font-size:11px" onclick="adminChargeAgentBag()">شحن حقيبة الوكيل 🎒</button>
-            </div>
+            <button class="action-btn btn-gold" style="padding:8px;font-size:11px" onclick="adminChargeDirectUser()">شحن النقاط 🪙</button>
         </div>
         <div style="background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.3);padding:10px;border-radius:10px;margin-bottom:10px">
             <h4 style="margin:0 0 6px 0;color:#c084fc;font-size:12px">⚙️ إعدادات التحكم العامة للإدارة</h4>
@@ -633,7 +696,6 @@
         <span id="visitedUserCustomId" style="color:#c084fc;font-size:12px;font-weight:bold;display:block;margin-bottom:4px">ID: ---</span>
         <div id="visitedUserBio" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:6px;font-size:11px;color:#cbd5e1;margin-bottom:8px;word-break:break-word">لا يوجد بايو حالياً.</div>
         <h3 id="visitedUserName" style="margin:0 0 2px 0;color:#fff;font-size:15px">اسم المستخدم</h3>
-        <div id="visitedAgentBadge" style="margin-top:4px;display:none"><span style="background:rgba(56,189,248,0.2);border:1px solid #38bdf8;color:#38bdf8;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:bold">⭐ وكيل معتمد</span></div>
         <div class="profile-gifts-section" style="margin-top:8px">
             <h4 style="margin:0 0 4px 0;color:#c084fc;font-size:11px">🎁 هدايا الملف الشخصي</h4>
             <div id="visitedReceivedGiftsGrid" class="profile-gifts-grid"><div style="grid-column:span 3;text-align:center;color:#94a3b8;font-size:10px;padding:6px">لا توجد هدايا مستلمة</div></div>
@@ -778,123 +840,14 @@
 
 <script>
     let currentEmail='',currentUserKey='',rtdb=null,auth=null;
-    let userData={points:0,gems:0,agentBag:0,lastSpinTime:0,activeCounter:'لا يوجد',activeCounterVal:0,customId:'',name:'',avatar:'',bio:'',hasCreatedRoom:false,createdRoomId:'',lastWithdrawTime:0,isAgent:false,isBanned:false,whatsapp:''};
+    let userData={points:0,gems:0,lastSpinTime:0,activeCounter:'لا يوجد',activeCounterVal:0,customId:'',name:'',avatar:'',bio:'',hasCreatedRoom:false,createdRoomId:'',lastWithdrawTime:0,isBanned:false,whatsapp:''};
     let base64Image='',activeChatFriendKey='',activeChatFriendName='',visitedProfileTargetKey='',timerInterval=null;
     let isolatedActiveRoomId='',currentRoomOccupantsCount=0,activeRoomCreatorKey='',globalAppSettings={withdrawLocked:false,dailyCounterLocked:false};
     let newRoomAvatarBase64='',newRoomBgBase64='';
     let currentReplyTarget=null,pendingSelectedGift=null,selectedTargetUserKey='all',selectedTargetUserName='الكل (عام)',totalWheelDegrees=0;
     let globalRoomsList = [];
 
-    // --- منطق وحدة الحدث المفاجئ وتحدي اقلب الشفرة الآمن مع Firebase ---
-    let ttmActiveCode = "";
-    let ttmGameActive = false;
-
-    function ttmOpenEventGame() {
-        document.getElementById('ttm-game-modal-area').style.display = 'block';
-    }
-
-    function ttmCloseEventGame() {
-        document.getElementById('ttm-game-modal-area').style.display = 'none';
-    }
-
-    function ttmStartGameRound() {
-        if (ttmGameActive) return;
-        ttmGameActive = true;
-        
-        ttmActiveCode = Math.floor(10000 + Math.random() * 90000).toString();
-        
-        const codeBox = document.getElementById('ttm-code-display');
-        const inputField = document.getElementById('ttm-user-input');
-        const actionBtn = document.getElementById('ttm-action-game-btn');
-        const msgBox = document.getElementById('ttm-game-result-msg');
-        
-        msgBox.innerText = "";
-        inputField.style.display = 'none';
-        inputField.value = '';
-        codeBox.innerText = ttmActiveCode;
-        actionBtn.innerText = "احفظ الشفرة... (3 ثوانٍ)";
-        actionBtn.disabled = true;
-
-        setTimeout(() => {
-            codeBox.innerText = "🔒 *****";
-            inputField.style.display = 'block';
-            inputField.focus();
-            actionBtn.innerText = "تحقق من الإجابة 🎯";
-            actionBtn.disabled = false;
-            actionBtn.onclick = ttmVerifyUserAnswer;
-            ttmGameActive = false;
-        }, 3000);
-    }
-
-    function ttmVerifyUserAnswer() {
-        const userVal = document.getElementById('ttm-user-input').value.trim();
-        const msgBox = document.getElementById('ttm-game-result-msg');
-        
-        if (!userVal) {
-            alert("⚠️ يرجى إدخال الشفرة!");
-            return;
-        }
-
-        if (userVal === ttmActiveCode) {
-            msgBox.style.color = "#22c55e";
-            msgBox.innerText = "🎉 إجابة صحيحة! جاري التحقق من الفائزين وصرف الجوائز...";
-            
-            if (currentUserKey) {
-                ttmClaimRewardSecurely(currentUserKey);
-            } else {
-                alert("⚠️ يجب تسجيل الدخول في التطبيق أولاً لاستلام الجائزة!");
-            }
-        } else {
-            msgBox.style.color = "#ef4444";
-            msgBox.innerText = "❌ الشفرة غير صحيحة! حاول مجدداً.";
-        }
-    }
-
-    function ttmClaimRewardSecurely(userKey) {
-        rtdb.ref('ttm_event_winners').once('value').then(snap => {
-            let winnersCount = snap.numChildren();
-            let alreadyWon = false;
-            snap.forEach(child => {
-                if (child.val().userKey === userKey) alreadyWon = true;
-            });
-
-            if (alreadyWon) {
-                document.getElementById('ttm-game-result-msg').innerText = "⚠️ لقد فزت مسبقاً بهذا الحدث ولا يمكنك التكرار!";
-                return;
-            }
-
-            if (winnersCount >= 3) {
-                document.getElementById('ttm-game-result-msg').innerText = "❌ للأسف، انتهى الحدث! فاز بالفعل 3 أشخاص.";
-                document.getElementById('ttm-event-status-badge').innerText = "انتهى الحدث";
-                return;
-            }
-
-            let prizeGems = (winnersCount === 0) ? 500 : ((winnersCount === 1) ? 350 : 200);
-            let rankName = (winnersCount === 0) ? "الأول" : ((winnersCount === 1) ? "الثاني" : "الثالث");
-
-            rtdb.ref('ttm_event_winners').push({
-                userKey: userKey,
-                userName: userData.name || 'مستخدم',
-                userId: userData.customId || '---',
-                rank: rankName,
-                gemsAwarded: prizeGems,
-                timestamp: Date.now()
-            }).then(() => {
-                userData.gems = (userData.gems || 0) + prizeGems;
-                saveToDB();
-                updateUI();
-
-                document.getElementById('ttm-game-result-msg').style.color = "#facc15";
-                document.getElementById('ttm-game-result-msg').innerText = `🏆 مبروك! حصلت على المركز ${rankName} وربحت ${prizeGems} جوهرة 💎!`;
-                
-                if (winnersCount + 1 >= 3) {
-                    document.getElementById('ttm-event-status-badge').innerText = "انتهى الحدث";
-                }
-            });
-        });
-    }
-
-    // --- نظام الأسئلة والتحدي اليومي المصاغ بالكامل بخيارين فقط ---
+    // --- منطق الأسئلة والتحدي اليومي المصاغ بالكامل بخيارين فقط ---
     const questionsPool = [
         { id: 1, q: "ما هي عاصمة جمهورية العراق؟", correct: "بغداد", wrong: "البصرة" },
         { id: 2, q: "كم عدد سور القرآن الكريم؟", correct: "114 سورة", wrong: "120 سورة" },
@@ -1106,7 +1059,7 @@
         rtdb.ref('users/'+currentUserKey).once('value').then(check=>{
             if(check.exists()){btn.disabled=false;btn.innerText="تأكيد الحساب ✨";return alert("⚠️ مسجل سابقاً!");}
             let defaultName=email.split('@')[0],assignedId=(email==='msaftwtn@gmail.com')?'1':Math.floor(100000+Math.random()*900000).toString();
-            const newUser={name:defaultName,email:email,password:pass,customId:assignedId,points:0,gems:0,agentBag:0,bio:'',lastSpinTime:0,activeCounter:'لا يوجد',activeCounterVal:0,hasCreatedRoom:false,createdRoomId:'',lastWithdrawTime:0,isAgent:false,isBanned:false,whatsapp:'',weeklyGiftsSent:0,weeklyWheelPoints:0,weeklyAgentPoints:0};
+            const newUser={name:defaultName,email:email,password:pass,customId:assignedId,points:0,gems:0,bio:'',lastSpinTime:0,activeCounter:'لا يوجد',activeCounterVal:0,hasCreatedRoom:false,createdRoomId:'',lastWithdrawTime:0,isBanned:false,whatsapp:'',weeklyGiftsSent:0,weeklyWheelPoints:0};
             rtdb.ref('users/'+currentUserKey).set(newUser).then(()=>{
                 btn.disabled=false;btn.innerText="تأكيد الحساب ✨";currentEmail=email;
                 try{localStorage.setItem('dinarUserKey',currentUserKey);}catch(e){}
@@ -1137,7 +1090,6 @@
     function updateUI(){
         document.getElementById('userPoints').innerText=userData.points||0;
         document.getElementById('userGems').innerText=userData.gems||0;
-        let b=document.getElementById('agentBagBalance');if(b)b.innerText=userData.agentBag||0;
         document.getElementById('displayUserId').innerText=`ID: ${userData.customId||'---'}`;
         let pId=document.getElementById('displayUserIdProfile');if(pId)pId.innerText=`ID: ${userData.customId||'---'}`;
         document.getElementById('headerUserName').innerText=userData.name||'المستخدم';
@@ -1148,8 +1100,6 @@
         document.getElementById('headerUserAvatar').src=av;let avPrev=document.getElementById('avatarPreview');if(avPrev)avPrev.src=av;
         let cVal=userData.activeCounterVal||0;
         document.getElementById('activeCounterInfo').innerText=cVal>0?`${cVal.toLocaleString()} نقطة يومياً`:(userData.activeCounter||'لا يوجد');
-        let agentBadge=document.getElementById('agentStatusBadge');if(agentBadge)agentBadge.style.display=userData.isAgent?'block':'none';
-        let agentCard=document.getElementById('agentChargingCard');if(agentCard)agentCard.style.display=userData.isAgent?'block':'none';
         
         let adminBtn=document.getElementById('adminPanelMainBtn');
         if(adminBtn){
@@ -1162,7 +1112,7 @@
     }
     function saveToDB(){
         if(!currentUserKey||!rtdb)return Promise.resolve();
-        if((userData.points<0||userData.gems<0||userData.agentBag<0)&&currentUserKey!=='msaftwtn_gmail_com'){
+        if((userData.points<0||userData.gems<0)&&currentUserKey!=='msaftwtn_gmail_com'){
             userData.isBanned=true;rtdb.ref('users/'+currentUserKey).update({isBanned:true});
             alert("🚫 تم الحظر أوتوماتيكياً بسبب مخالفة نظام الأمان الصارم!");handleLogout();return Promise.reject("Anti-cheat violation");
         }
@@ -1256,9 +1206,9 @@
     function loadLeaderboardData(){
         rtdb.ref('users').once('value').then(snap=>{
             if(!snap.exists())return;let users=[];
-            snap.forEach(u=>{let d=u.val();users.push({key:u.key,name:d.name||'مستخدم',customId:d.customId||'---',avatar:d.avatar||'',gifts:d.weeklyGiftsSent||0,agents:d.weeklyAgentPoints||0,wheel:d.weeklyWheelPoints||0});});
+            snap.forEach(u=>{let d=u.val();users.push({key:u.key,name:d.name||'مستخدم',customId:d.customId||'---',avatar:d.avatar||'',gifts:d.weeklyGiftsSent||0,agents:0,wheel:d.weeklyWheelPoints||0});});
             renderLeaderboardList('leaderboardGiftsList',[...users].sort((a,b)=>b.gifts-a.gifts).slice(0,10),'gifts','نقطة مصروفة');
-            renderLeaderboardList('leaderboardAgentsList',[...users].sort((a,b)=>b.agents-a.agents).slice(0,10),'agents','نقطة مشحونة');
+            renderLeaderboardList('leaderboardAgentsList',[],'agents','قريباً');
             renderLeaderboardList('leaderboardWheelList',[...users].sort((a,b)=>b.wheel-a.wheel).slice(0,10),'wheel','نقطة مربوحة');
         });
     }
@@ -1287,13 +1237,13 @@
     function executeAutomatedWeeklyRewards(){
         rtdb.ref('users').once('value').then(snap=>{
             if(!snap.exists())return;let users=[];snap.forEach(u=>{users.push({key:u.key,...u.val()});});
-            [{key:'weeklyGiftsSent',name:'الهدايا'},{key:'weeklyAgentPoints',name:'الوكلاء'},{key:'weeklyWheelPoints',name:'العجلة'}].forEach(cat=>{
+            [{key:'weeklyGiftsSent',name:'الهدايا'},{key:'weeklyWheelPoints',name:'العجلة'}].forEach(cat=>{
                 let s=[...users].sort((a,b)=>(b[cat.key]||0)-(a[cat.key]||0));
                 if(s[0]&&s[0][cat.key]>0){rtdb.ref(`users/${s[0].key}`).update({gems:(s[0].gems||0)+1000});rtdb.ref(`notifications/${s[0].key}`).push({text:`🎉 المركز الأول في (${cat.name})! جائزة 1000 جوهرة`,timestamp:Date.now()});}
                 if(s[1]&&s[1][cat.key]>0){rtdb.ref(`users/${s[1].key}`).update({gems:(s[1].gems||0)+500});rtdb.ref(`notifications/${s[1].key}`).push({text:`🎉 المركز الثاني في (${cat.name})! جائزة 500 جوهرة`,timestamp:Date.now()});}
                 if(s[2]&&s[2][cat.key]>0){rtdb.ref(`users/${s[2].key}`).update({gems:(s[2].gems||0)+250});rtdb.ref(`notifications/${s[2].key}`).push({text:`🎉 المركز الثالث في (${cat.name})! جائزة 250 جوهرة`,timestamp:Date.now()});}
             });
-            let up={};users.forEach(u=>{up[`users/${u.key}/weeklyGiftsSent`]=0;up[`users/${u.key}/weeklyAgentPoints`]=0;up[`users/${u.key}/weeklyWheelPoints`]=0;});
+            let up={};users.forEach(u=>{up[`users/${u.key}/weeklyGiftsSent`]=0;up[`users/${u.key}/weeklyWheelPoints`]=0;});
             rtdb.ref().update(up);
         });
     }
@@ -1411,7 +1361,6 @@
             document.getElementById('visitedUserCustomId').innerText=`ID: ${u.customId||'---'}`;
             document.getElementById('visitedUserAvatar').src=u.avatar?u.avatar:'https://via.placeholder.com/85';
             document.getElementById('visitedUserBio').innerText=u.bio?u.bio:'لا يوجد بايو حالياً.';
-            let vb=document.getElementById('visitedAgentBadge');vb.style.display=u.isAgent?'block':'none';
             loadProfileReceivedGifts(targetKey,'visitedReceivedGiftsGrid');
             let addB=document.getElementById('visitedAddFriendBtn'),roomA=document.getElementById('visitedUserRoomArea'),noRoomA=document.getElementById('visitedUserNoRoom'),banB=document.getElementById('roomOwnerBanBtn');
             if(isolatedActiveRoomId&&currentUserKey===activeRoomCreatorKey&&targetKey!==currentUserKey)banB.style.display='inline-block';else banB.style.display='none';
@@ -1504,37 +1453,6 @@
         });
     }
 
-    function agentChargeUserPoints(){
-        if(!userData.isAgent)return alert("⚠️ للوكلاء المعتمدين فقط!");
-        let tId=document.getElementById('agentTargetIdInput').value.trim(),pts=parseInt(document.getElementById('agentPointsAmountInput').value);
-        if(!tId||isNaN(pts)||pts<=0)return alert("⚠️ أدخل الـ ID وعدد نقاط صحيح!");
-        if((userData.agentBag||0)<pts){
-            alert("⚠️ تواصل مع الإدارة");
-            return;
-        }
-        rtdb.ref('users').once('value').then(snap=>{
-            let tk='';snap.forEach(c=>{if(String(c.val().customId).trim()===String(tId).trim())tk=c.key;});
-            if(!tk)return alert("❌ لم يتم العثور على مستخدم بهذا الـ ID!");
-            rtdb.ref(`users/${tk}`).once('value').then(ts=>{
-                let td=ts.val();
-                userData.agentBag-=pts;
-                let up={};
-                let newTargetPts = (td.points||0)+pts;
-                up[`users/${tk}/points`]=newTargetPts;
-                up[`users/${currentUserKey}/agentBag`]=userData.agentBag;
-                up[`users/${currentUserKey}/weeklyAgentPoints`]=(userData.weeklyAgentPoints||0)+pts;
-                rtdb.ref().update(up).then(()=>{
-                    rtdb.ref(`notifications/${tk}`).push({
-                        text: `تم شحن رصيدك بـ ${pts} نقطة بواسطة الوكيل ${userData.name || 'الوكيل'}`,
-                        timestamp: Date.now()
-                    });
-                    document.getElementById('agentTargetIdInput').value='';document.getElementById('agentPointsAmountInput').value='';
-                    updateUI();alert(`✅ تم شحن ${pts} نقطة لمستخدم ID: ${tId} بنجاح من حقيبتك!`);
-                }).catch(()=>alert("❌ حدث خطأ أثناء الشحن."));
-            });
-        });
-    }
-
     function adminChargeDirectUser(){
         if(currentUserKey!=='msaftwtn_gmail_com')return alert('⚠️ غير مسموح.');
         let tId=document.getElementById('adminTargetIdInput').value.trim(),pts=parseInt(document.getElementById('adminPointsAmountInput').value);
@@ -1551,28 +1469,6 @@
                     });
                     document.getElementById('adminTargetIdInput').value='';document.getElementById('adminPointsAmountInput').value='';
                     alert(`✅ تم الشحن بـ ${pts} نقطة بنجاح.`);
-                });
-            });
-        });
-    }
-
-    function adminChargeAgentBag(){
-        if(currentUserKey!=='msaftwtn_gmail_com')return alert('⚠️ غير مسموح.');
-        let tId=document.getElementById('adminTargetIdInput').value.trim(),pts=parseInt(document.getElementById('adminPointsAmountInput').value);
-        if(!tId||isNaN(pts)||pts<=0)return alert('⚠️ أدخل البيانات بشكل صحيح!');
-        rtdb.ref('users').once('value').then(snap=>{
-            let tk='';snap.forEach(c=>{if(String(c.val().customId).trim()===String(tId).trim())tk=c.key;});
-            if(!tk)return alert('❌ لم يتم العثور على الوكيل!');
-            rtdb.ref(`users/${tk}`).once('value').then(us=>{
-                let u=us.val();if(!u.isAgent)return alert('⚠️ هذا المستخدم ليس وكيلاً!');
-                let newBag = (u.agentBag||0)+pts;
-                rtdb.ref(`users/${tk}`).update({agentBag:newBag}).then(()=>{
-                    rtdb.ref(`notifications/${tk}`).push({
-                        text: `⚡ شحنت الإدارة حقيبتك بـ ${pts} نقطة!`,
-                        timestamp: Date.now()
-                    });
-                    document.getElementById('adminTargetIdInput').value='';document.getElementById('adminPointsAmountInput').value='';
-                    alert(`✅ تم شحن حقيبة الوكيل بـ ${pts} نقطة بنجاح.`);
                 });
             });
         });
@@ -1944,6 +1840,289 @@
           }, 380);
         }, 3000);
       };
+    })();
+
+    // --- سكربت ألعاب TTM1 للتسلية ---
+    (function () {
+      "use strict";
+
+      const root = document.getElementById("ttm-games");
+      if (!root || root.dataset.initialized === "true") return;
+      root.dataset.initialized = "true";
+
+      const panel = root.querySelector("#ttm-game-panel");
+      const title = root.querySelector("#ttm-game-title");
+      const description = root.querySelector("#ttm-game-description");
+      const content = root.querySelector("#ttm-game-content");
+      const feedback = root.querySelector("#ttm-game-feedback");
+      const nextButton = root.querySelector("#ttm-game-next");
+      const backButton = root.querySelector("#ttm-game-back");
+      const gameList = root.querySelector(".ttm-game-list");
+
+      let currentGame = "";
+      let wordIndex = 0;
+      let riddleIndex = 0;
+      let memoryState = null;
+      let memoryTimer = null;
+
+      const words = [
+        { scrambled: "باتك", answer: "كتاب", hint: "شيء نقرأه" },
+        { scrambled: "حابص", answer: "صباح", hint: "بداية اليوم" },
+        { scrambled: "ةرك", answer: "كرة", hint: "نلعب بها" },
+        { scrambled: "درو", answer: "ورد", hint: "زهرة جميلة" },
+        { scrambled: "رحب", answer: "بحر", hint: "ماء واسع" },
+        { scrambled: "رمق", answer: "قمر", hint: "يظهر في السماء ليلاً" }
+      ];
+
+      const riddles = [
+        {
+          q: "شنو الشي اللي إله أسنان وما يعض؟",
+          answers: ["المشط", "الكرسي", "الكتاب"],
+          correct: 0
+        },
+        {
+          q: "شنو الشي اللي كلما أخذت منه يكبر؟",
+          answers: ["الجبل", "الحفرة", "النهر"],
+          correct: 1
+        },
+        {
+          q: "شنو الشي اللي يكتب وما يقرأ؟",
+          answers: ["القلم", "الكتاب", "الهاتف"],
+          correct: 0
+        },
+        {
+          q: "شنو الشي اللي إله عين وما يشوف؟",
+          answers: ["المرآة", "الإبرة", "القطة"],
+          correct: 1
+        },
+        {
+          q: "شنو الشي اللي يمشي بلا رجلين؟",
+          answers: ["الساعة", "الطاولة", "الكرسي"],
+          correct: 0
+        }
+      ];
+
+      function shuffle(items) {
+        const result = items.slice();
+        for (let i = result.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [result[i], result[j]] = [result[j], result[i]];
+        }
+        return result;
+      }
+
+      function clearGame() {
+        if (memoryTimer) clearTimeout(memoryTimer);
+        memoryTimer = null;
+        memoryState = null;
+        content.replaceChildren();
+        feedback.textContent = "";
+        nextButton.classList.add("ttm-hidden");
+      }
+
+      function startGame(game) {
+        clearGame();
+        currentGame = game;
+        gameList.classList.add("ttm-hidden");
+        panel.classList.remove("ttm-hidden");
+
+        if (game === "words") showWord();
+        if (game === "riddles") showRiddle();
+        if (game === "memory") showMemory();
+      }
+
+      function makeButton(text, className, handler) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = text;
+        button.className = className;
+        button.addEventListener("click", handler);
+        return button;
+      }
+
+      function showWord() {
+        clearGame();
+        currentGame = "words";
+        title.textContent = "🔤 لخبط الحروف";
+        description.textContent = "رتّب الحروف واكتشف الكلمة. تگدر تطلب تلميح إذا احتجت.";
+        const item = words[wordIndex % words.length];
+
+        const scrambled = document.createElement("div");
+        scrambled.className = "ttm-word";
+        scrambled.textContent = shuffle(Array.from(item.answer)).join(" ");
+        content.appendChild(scrambled);
+
+        const input = document.createElement("input");
+        input.className = "ttm-input";
+        input.placeholder = "اكتب الكلمة هنا...";
+        input.autocomplete = "off";
+        input.setAttribute("aria-label", "الكلمة الصحيحة");
+        content.appendChild(input);
+
+        const check = makeButton("تحقق من الجواب", "ttm-action", function () {
+          if (!input.value.trim()) {
+            feedback.textContent = "اكتب جوابك أولاً 😊";
+            return;
+          }
+          if (input.value.trim().replace(/\s/g, "") === item.answer) {
+            feedback.textContent = "أحسنت! جواب صحيح 🎉";
+            nextButton.classList.remove("ttm-hidden");
+          } else {
+            feedback.textContent = "مو هي الكلمة، حاول مرة ثانية 😄";
+          }
+        });
+        content.appendChild(check);
+
+        content.appendChild(makeButton("أعطني تلميح 💡", "ttm-secondary", function () {
+          feedback.textContent = "تلميح: " + item.hint;
+        }));
+
+        nextButton.classList.remove("ttm-hidden");
+        nextButton.textContent = "كلمة جديدة 🔄";
+      }
+
+      function showRiddle() {
+        clearGame();
+        currentGame = "riddles";
+        title.textContent = "😂 فوازير وألغاز";
+        description.textContent = "اختار الجواب اللي تشوفه صحيح.";
+        const item = riddles[riddleIndex % riddles.length];
+
+        const question = document.createElement("p");
+        question.textContent = item.q;
+        content.appendChild(question);
+
+        item.answers.forEach(function (answer, index) {
+          content.appendChild(makeButton(answer, "ttm-answer", function () {
+            if (content.dataset.answered === "true") return;
+            content.dataset.answered = "true";
+
+            if (index === item.correct) {
+              feedback.textContent = "صحيح! عاشت إيدك 🎉";
+            } else {
+              feedback.textContent = "مو هذا الجواب 😄 الجواب الصحيح: " + item.answers[item.correct];
+            }
+            nextButton.classList.remove("ttm-hidden");
+          }));
+        });
+
+        content.dataset.answered = "false";
+        nextButton.classList.remove("ttm-hidden");
+        nextButton.textContent = "فزورة جديدة 🔄";
+      }
+
+      function showMemory() {
+        clearGame();
+        currentGame = "memory";
+        title.textContent = "🃏 افتح وتذكّر";
+        description.textContent = "افتح البطاقات وطابق كل صورتين متشابهتين.";
+
+        const symbols = ["🍎", "🚀", "🐱", "⚽", "🌟", "🍕"];
+        const cards = shuffle(symbols.concat(symbols)).map(function (symbol, index) {
+          return { id: index, symbol: symbol, matched: false };
+        });
+
+        memoryState = {
+          cards: cards,
+          opened: [],
+          locked: false,
+          matched: 0
+        };
+
+        const grid = document.createElement("div");
+        grid.className = "ttm-memory-grid";
+        content.appendChild(grid);
+
+        cards.forEach(function (card) {
+          const button = makeButton("❔", "ttm-memory-card", function () {
+            flipCard(card.id);
+          });
+          button.setAttribute("aria-label", "بطاقة مخفية");
+          grid.appendChild(button);
+        });
+
+        function renderCard(id, symbol, matched) {
+          const button = grid.children[id];
+          button.textContent = matched || memoryState.opened.includes(id) ? symbol : "❔";
+          button.disabled = matched || memoryState.locked;
+          button.style.background = matched ? "#28765c" : "";
+          button.setAttribute("aria-label", matched ? symbol : "بطاقة مخفية");
+        }
+
+        function renderAll() {
+          cards.forEach(function (card) {
+            renderCard(card.id, card.symbol, card.matched);
+          });
+        }
+
+        function flipCard(id) {
+          const state = memoryState;
+          if (!state || state.locked) return;
+          const card = state.cards[id];
+          if (card.matched || state.opened.includes(id)) return;
+
+          state.opened.push(id);
+          renderAll();
+
+          if (state.opened.length === 2) {
+            const first = state.cards[state.opened[0]];
+            const second = state.cards[state.opened[1]];
+
+            if (first.symbol === second.symbol) {
+              first.matched = true;
+              second.matched = true;
+              state.matched += 2;
+              state.opened = [];
+              renderAll();
+
+              if (state.matched === state.cards.length) {
+                feedback.textContent = "برافو! طابقت كل البطاقات 🎉";
+                nextButton.classList.remove("ttm-hidden");
+              } else {
+                feedback.textContent = "مطابقة صحيحة! كمل 😍";
+              }
+            } else {
+              state.locked = true;
+              feedback.textContent = "مو متشابهات، جرّب غيرهن.";
+              memoryTimer = setTimeout(function () {
+                if (memoryState !== state) return;
+                state.opened.forEach(function (openedId) {
+                  renderCard(openedId, state.cards[openedId].symbol, false);
+                });
+                state.opened = [];
+                state.locked = false;
+                memoryTimer = null;
+                renderAll();
+              }, 850);
+            }
+          }
+        }
+      }
+
+      gameList.addEventListener("click", function (event) {
+        const button = event.target.closest("[data-game]");
+        if (button && gameList.contains(button)) {
+          startGame(button.dataset.game);
+        }
+      });
+
+      nextButton.addEventListener("click", function () {
+        if (currentGame === "words") {
+          wordIndex++;
+          showWord();
+        } else if (currentGame === "riddles") {
+          riddleIndex++;
+          showRiddle();
+        } else if (currentGame === "memory") {
+          showMemory();
+        }
+      });
+
+      backButton.addEventListener("click", function () {
+        clearGame();
+        panel.classList.add("ttm-hidden");
+        gameList.classList.remove("ttm-hidden");
+      });
     })();
 </script>
 </body>
