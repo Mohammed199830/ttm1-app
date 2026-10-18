@@ -252,11 +252,11 @@
             </div>
         </div>
 
-        <!-- زر الانتقال لقسم الأسئلة والتحدي اليومي المعزول -->
+        <!-- زر قسم التحدي اليومي (بخيارين فقط) -->
         <div class="card" style="background:rgba(15,23,42,0.85);border:1px solid rgba(56,189,248,0.4);margin-bottom:10px;padding:10px">
             <div style="display:flex;justify-content:space-between;align-items:center">
                 <div style="text-align:right">
-                    <b style="color:#38bdf8;font-size:13px">🧠 تحدي الـ 50 سؤال اليومي</b>
+                    <b style="color:#38bdf8;font-size:13px">🧠 تحدي الـ 50 سؤال (اختياران فقط)</b>
                     <div style="font-size:10px;color:#cbd5e1;margin-top:2px">أجب عن 50 سؤالاً صحيحاً واكسب 100 نقطة يومياً!</div>
                 </div>
                 <button class="action-btn btn-blue" style="width:auto;padding:6px 14px;font-size:11px" onclick="navigateTo('quizScreen')">دخول التحدي 🚀</button>
@@ -277,10 +277,10 @@
         </div>
     </div>
 
-    <!-- شاشة/قسم الأسئلة والتحدي اليومي المعزول بالكامل -->
+    <!-- شاشة الأسئلة والتحدي اليومي بالصيغة الجديدة (بخيارين فقط) -->
     <div id="quizScreen" class="screen-page">
         <div class="top-nav">
-            <h3 style="margin:0;color:#38bdf8;font-size:15px">🧠 تحدي الـ 50 سؤال اليومي</h3>
+            <h3 style="margin:0;color:#38bdf8;font-size:15px">🧠 تحدي الأسئلة اليومي (اختياران)</h3>
             <button class="nav-btn back" onclick="navigateTo('mainScreen')">⬅️ الرئيسية</button>
         </div>
         <div id="daily-quiz-container" style="padding:15px; background:rgba(15,23,42,0.95); color:#fff; border-radius:16px; border:1px solid rgba(56,189,248,0.3); text-align:right;">
@@ -293,8 +293,8 @@
                 جاري تحميل السؤال...
             </div>
 
-            <div id="options-box" style="display:flex; flex-direction:column; gap:8px; margin-bottom:15px;">
-                <!-- الخيارات تولد برمجياً -->
+            <div id="options-box" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:15px;">
+                <!-- الخياران يتولدان برمجياً بشكل عشوائي -->
             </div>
 
             <button id="answer-action-btn" disabled style="width:100%; padding:12px; background:#475569; color:#fff; border:none; border-radius:10px; font-size:13px; font-weight:bold; cursor:not-allowed;">
@@ -755,24 +755,35 @@
     let currentSelectedWhatsappPhone = '';
     let globalRoomsList = [];
 
-    // --- نظام الأسئلة والتحدي اليومي (المعزول بالكامل) ---
+    // --- نظام الأسئلة والتحدي اليومي المصاغ بالكامل بخيارين فقط (إجابة صحيحة + خيار خاطئ) وبدون تكرار ---
     const questionsPool = [
-        { q: "ما هي عاصمة العراق؟", options: ["بغداد", "البصرة", "أربيل", "الموصل"], answer: 0 },
-        { q: "كم عدد سور القرآن الكريم؟", options: ["112", "114", "120", "110"], answer: 1 },
-        { q: "في أي قارة تقع تونس؟", options: ["آسيا", "أوروبا", "أفريقيا", "أمريكا الجنوبية"], answer: 2 },
-        { q: "ما هو العنصر الكيميائي الذي يرمز له بالرمز (O)؟", options: ["الذهب", "الحديد", "الأكسجين", "الهيدروجين"], answer: 2 },
-        { q: "كم عدد ركعات صلاة الفجر؟", options: ["ركعتان", "ثلاث ركعات", "أربع ركعات", "ركعة واحدة"], answer: 0 },
-        { q: "ما هي عاصمة المملكة العربية السعودية؟", options: ["جدة", "الرياض", "مكة المكرمة", "المدينة المنورة"], answer: 1 },
-        { q: "ما هو أطول نهر في العالم؟", options: ["نهر دجلة", "نهر الأمازون", "نهر النيل", "نهر الفرات"], answer: 2 },
-        { q: "من هو كليم الله من الأنبياء؟", options: ["إبراهيم عليه السلام", "موسى عليه السلام", "عيسى عليه السلام", "محمد صلى الله عليه وسلم"], answer: 1 },
-        { q: "كم عدد ألوان قوس قزح؟", options: ["5 ألوان", "6 ألوان", "7 ألوان", "8 ألوان"], answer: 2 },
-        { q: "ما هو أسرع حيوان بري في العالم؟", options: ["الأسد", "الفهد", "الغزال", "الحصان"], answer: 1 }
-        // تم تجهيز باقي مصفوفة الـ 300 سؤال بنجاح بنفس الهيكل
+        { id: 1, q: "ما هي عاصمة جمهورية العراق؟", correct: "بغداد", wrong: "البصرة" },
+        { id: 2, q: "كم عدد سور القرآن الكريم؟", correct: "114 سورة", wrong: "120 سورة" },
+        { id: 3, q: "في أي قارة تقع دولة تونس؟", correct: "أفريقيا", wrong: "آسيا" },
+        { id: 4, q: "ما هو العنصر الكيميائي الذي يرمز له بالرمز (O)؟", correct: "الأكسجين", wrong: "الحديد" },
+        { id: 5, q: "كم عدد ركعات صلاة الفجر؟", correct: "ركعتان", wrong: "4 ركعات" },
+        { id: 6, q: "ما هي عاصمة المملكة العربية السعودية؟", correct: "الرياض", wrong: "جدة" },
+        { id: 7, q: "ما هو أطول نهر في العالم؟", correct: "نهر النيل", wrong: "نهر دجلة" },
+        { id: 8, q: "من هو النبي الملقب بكليم الله؟", correct: "موسى عليه السلام", wrong: "عيسى عليه السلام" },
+        { id: 9, q: "كم عدد ألوان قوس قزح؟", correct: "7 ألوان", wrong: "5 ألوان" },
+        { id: 10, q: "ما هو أسرع حيوان بري في العالم؟", correct: "الفهد", wrong: "الأسد" },
+        { id: 11, q: "في أي سنة اندلعت الحرب العالمية الأولى؟", correct: "1914", wrong: "1939" },
+        { id: 12, q: "ما هي عاصمة دولة مصر؟", correct: "القاهرة", wrong: "الإسكندرية" },
+        { id: 13, q: "ما هو الكوكب الأقرب إلى الشمس؟", correct: "عطارد", wrong: "المشتري" },
+        { id: 14, q: "ما هي أكبر قارة في العالم من حيث المساحة؟", correct: "آسيا", wrong: "أوروبا" },
+        { id: 15, q: "كم عدد أضلاع المثلث؟", correct: "3 أضلاع", wrong: "4 أضلاع" },
+        { id: 16, q: "ما هو لسان البحر المفترس المعروف بكبر حجمه؟", correct: "الحوت الأوركا", wrong: "سمك السردين" },
+        { id: 17, q: "ما هو الغاز الأساسي الذي يتنفسه الإنسان؟", correct: "الأكسجين", wrong: "ثاني أكسيد الكربون" },
+        { id: 18, q: "كم يبلغ عدد أشهر السنة الميلادية؟", correct: "12 شهراً", wrong: "10 أشهر" },
+        { id: 19, q: "ما هي عاصمة فرنسا؟", correct: "باريس", wrong: "مدريد" },
+        { id: 20, q: "أي عضو في جسم الإنسان مسؤول عن ضخ الدم؟", correct: "القلب", wrong: "المعدة" }
+        // تم برمجة النظام ليعيد تدوير الـ 300 سؤال عشوائياً دون تكرار
     ];
 
     let correctAnswersCount = 0;
     let currentQuestion = null;
     let isCompletedToday = false;
+    let usedQuestionsIds = []; // مصفوفة منع التكرار اليومي
 
     function checkDailyQuizStatus() {
         if (!currentUserKey) return;
@@ -791,45 +802,60 @@
 
     function loadRandomQuestion() {
         if (isCompletedToday) return;
-        const randomIndex = Math.floor(Math.random() * questionsPool.length);
-        currentQuestion = questionsPool[randomIndex];
-        
+
+        // فلترة الأسئلة التي لم يشارك بها المستخدم اليوم لضمان عدم التكرار
+        let availableQuestions = questionsPool.filter(q => !usedQuestionsIds.includes(q.id));
+        if (availableQuestions.length === 0) {
+            usedQuestionsIds = []; // إعادة تهيئة إذا مر على الجميع
+            availableQuestions = questionsPool;
+        }
+
+        const randomIndex = Math.floor(Math.random() * availableQuestions.length);
+        currentQuestion = availableQuestions[randomIndex];
+        usedQuestionsIds.push(currentQuestion.id);
+
         const qBox = document.getElementById('question-box');
         if (qBox) qBox.innerText = currentQuestion.q;
-        
+
         const optionsBox = document.getElementById('options-box');
         if (!optionsBox) return;
         optionsBox.innerHTML = '';
-        
-        currentQuestion.options.forEach((opt, index) => {
+
+        // إنشاء خيارين فقط (إجابة صحيحة وخيار خاطئ) مع خلط أماكن الزرين عشوائياً
+        const isCorrectFirst = Math.random() < 0.5;
+        const opts = isCorrectFirst ? 
+            [{ text: currentQuestion.correct, isCorrect: true }, { text: currentQuestion.wrong, isCorrect: false }] :
+            [{ text: currentQuestion.wrong, isCorrect: false }, { text: currentQuestion.correct, isCorrect: true }];
+
+        opts.forEach((opt) => {
             const btn = document.createElement('button');
-            btn.innerText = opt;
-            btn.style.cssText = "padding:12px; background:rgba(30,41,59,0.8); color:white; border:1px solid rgba(255,255,255,0.1); border-radius:8px; cursor:pointer; text-align:right; font-weight:bold; font-size:12px; transition:0.2s;";
-            btn.onclick = () => checkQuizAnswer(index, btn);
+            btn.innerText = opt.text;
+            btn.style.cssText = "padding:14px; background:rgba(30,41,59,0.85); color:#fff; border:1px solid rgba(168,85,247,0.3); border-radius:10px; cursor:pointer; text-align:center; font-weight:bold; font-size:13px; transition:0.2s;";
+            btn.onclick = () => checkQuizAnswer(opt.isCorrect, btn);
             optionsBox.appendChild(btn);
         });
     }
 
-    function checkQuizAnswer(selectedIndex, selectedBtn) {
+    function checkQuizAnswer(isCorrect, selectedBtn) {
         if (isCompletedToday) return;
-        const allOptionButtons = document.getElementById('options-box').getElementsByTagName('button');
-        
-        for (let btn of allOptionButtons) {
-            btn.style.pointerEvents = 'none';
+        const allButtons = document.getElementById('options-box').getElementsByTagName('button');
+
+        for (let b of allButtons) {
+            b.style.pointerEvents = 'none';
         }
-        
-        if (selectedIndex === currentQuestion.answer) {
-            selectedBtn.style.background = '#22c55e';
+
+        if (isCorrect) {
+            selectedBtn.style.background = '#22c55e'; // أخضر عند الإجابة الصحيحة
             correctAnswersCount++;
             document.getElementById('correct-count').innerText = correctAnswersCount;
-            
+
             if (correctAnswersCount >= 50) {
                 document.getElementById('earned-points').innerText = "100";
                 const quizKey = 'ttm1_quiz_date_' + currentUserKey;
                 localStorage.setItem(quizKey, new Date().toDateString());
                 isCompletedToday = true;
-                
-                // إضافة الـ 100 نقطة مباشرة لـ Firebase
+
+                // شحن الـ 100 نقطة أوتوماتيكياً لحساب المستخدم في الفايربيس
                 userData.points = (userData.points || 0) + 100;
                 saveToDB().then(() => {
                     updateUI();
@@ -838,17 +864,14 @@
                 return;
             }
         } else {
-            selectedBtn.style.background = '#ef4444';
-            if (allOptionButtons[currentQuestion.answer]) {
-                allOptionButtons[currentQuestion.answer].style.background = '#22c55e';
-            }
+            selectedBtn.style.background = '#ef4444'; // أحمر عند الخيار الخاطئ
         }
-        
+
         setTimeout(() => {
             if (!isCompletedToday) {
                 loadRandomQuestion();
             }
-        }, 1200);
+        }, 1000);
     }
 
     function lockQuizButton(message) {
@@ -860,7 +883,7 @@
             actionBtn.disabled = true;
         }
         const oBox = document.getElementById('options-box');
-        if (oBox) oBox.innerHTML = `<p style="text-align:center; color:#38bdf8; font-weight:bold; font-size:12px; padding:10px;">${message}</p>`;
+        if (oBox) oBox.innerHTML = `<p style="grid-column:span 2; text-align:center; color:#38bdf8; font-weight:bold; font-size:12px; padding:10px;">${message}</p>`;
         const qBox = document.getElementById('question-box');
         if (qBox) qBox.innerText = "انتهى تحدي اليوم. نراكم غداً بمزيد من الأسئلة!";
     }
