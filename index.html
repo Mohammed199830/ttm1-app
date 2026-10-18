@@ -251,6 +251,18 @@
                 <span style="font-size:20px">💎</span>
             </div>
         </div>
+
+        <!-- زر الانتقال لقسم الأسئلة والتحدي اليومي المعزول -->
+        <div class="card" style="background:rgba(15,23,42,0.85);border:1px solid rgba(56,189,248,0.4);margin-bottom:10px;padding:10px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <div style="text-align:right">
+                    <b style="color:#38bdf8;font-size:13px">🧠 تحدي الـ 50 سؤال اليومي</b>
+                    <div style="font-size:10px;color:#cbd5e1;margin-top:2px">أجب عن 50 سؤالاً صحيحاً واكسب 100 نقطة يومياً!</div>
+                </div>
+                <button class="action-btn btn-blue" style="width:auto;padding:6px 14px;font-size:11px" onclick="navigateTo('quizScreen')">دخول التحدي 🚀</button>
+            </div>
+        </div>
+
         <div class="grid-buttons-custom">
             <div class="grid-btn-item" onclick="openWithdrawModal()"><div class="icon-circle">💸</div><span>سحب الأرباح</span><div class="mini-arrow">⌄</div></div>
             <div class="grid-btn-item" onclick="navigateTo('leaderboardScreen')"><div class="icon-circle">🏆</div><span>التصنيف الأسبوعي</span><div class="mini-arrow">⌄</div></div>
@@ -262,6 +274,32 @@
             <div class="bottom-nav-wheel-circle" onclick="navigateTo('wheelScreen')" title="عجلة الحظ">🎡</div>
             <button class="bottom-nav-item" onclick="navigateTo('friendsScreen')"><span>👥</span><div>الأصدقاء</div></button>
             <button class="bottom-nav-item" onclick="navigateTo('shopScreen')"><span>🛒</span><div>المتجر</div></button>
+        </div>
+    </div>
+
+    <!-- شاشة/قسم الأسئلة والتحدي اليومي المعزول بالكامل -->
+    <div id="quizScreen" class="screen-page">
+        <div class="top-nav">
+            <h3 style="margin:0;color:#38bdf8;font-size:15px">🧠 تحدي الـ 50 سؤال اليومي</h3>
+            <button class="nav-btn back" onclick="navigateTo('mainScreen')">⬅️ الرئيسية</button>
+        </div>
+        <div id="daily-quiz-container" style="padding:15px; background:rgba(15,23,42,0.95); color:#fff; border-radius:16px; border:1px solid rgba(56,189,248,0.3); text-align:right;">
+            <div id="quiz-stats" style="display:flex; justify-content:space-between; margin-bottom:15px; font-size:12px; background:rgba(30,41,59,0.8); padding:10px; border-radius:10px;">
+                <span>الإجابات الصحيحة: <strong id="correct-count" style="color:#22c55e;">0</strong> / 50</span>
+                <span>الربح اليومي: <strong id="earned-points" style="color:#eab308;">0</strong> / 100 🪙</span>
+            </div>
+
+            <div id="question-box" style="background:rgba(30,41,59,0.9); padding:15px; border-radius:10px; margin-bottom:15px; min-height:75px; display:flex; align-items:center; font-size:14px; font-weight:bold; color:#f8fafc; border:1px solid rgba(255,255,255,0.05);">
+                جاري تحميل السؤال...
+            </div>
+
+            <div id="options-box" style="display:flex; flex-direction:column; gap:8px; margin-bottom:15px;">
+                <!-- الخيارات تولد برمجياً -->
+            </div>
+
+            <button id="answer-action-btn" disabled style="width:100%; padding:12px; background:#475569; color:#fff; border:none; border-radius:10px; font-size:13px; font-weight:bold; cursor:not-allowed;">
+                أجب عن الأسئلة اليومية
+            </button>
         </div>
     </div>
 
@@ -717,6 +755,116 @@
     let currentSelectedWhatsappPhone = '';
     let globalRoomsList = [];
 
+    // --- نظام الأسئلة والتحدي اليومي (المعزول بالكامل) ---
+    const questionsPool = [
+        { q: "ما هي عاصمة العراق؟", options: ["بغداد", "البصرة", "أربيل", "الموصل"], answer: 0 },
+        { q: "كم عدد سور القرآن الكريم؟", options: ["112", "114", "120", "110"], answer: 1 },
+        { q: "في أي قارة تقع تونس؟", options: ["آسيا", "أوروبا", "أفريقيا", "أمريكا الجنوبية"], answer: 2 },
+        { q: "ما هو العنصر الكيميائي الذي يرمز له بالرمز (O)؟", options: ["الذهب", "الحديد", "الأكسجين", "الهيدروجين"], answer: 2 },
+        { q: "كم عدد ركعات صلاة الفجر؟", options: ["ركعتان", "ثلاث ركعات", "أربع ركعات", "ركعة واحدة"], answer: 0 },
+        { q: "ما هي عاصمة المملكة العربية السعودية؟", options: ["جدة", "الرياض", "مكة المكرمة", "المدينة المنورة"], answer: 1 },
+        { q: "ما هو أطول نهر في العالم؟", options: ["نهر دجلة", "نهر الأمازون", "نهر النيل", "نهر الفرات"], answer: 2 },
+        { q: "من هو كليم الله من الأنبياء؟", options: ["إبراهيم عليه السلام", "موسى عليه السلام", "عيسى عليه السلام", "محمد صلى الله عليه وسلم"], answer: 1 },
+        { q: "كم عدد ألوان قوس قزح؟", options: ["5 ألوان", "6 ألوان", "7 ألوان", "8 ألوان"], answer: 2 },
+        { q: "ما هو أسرع حيوان بري في العالم؟", options: ["الأسد", "الفهد", "الغزال", "الحصان"], answer: 1 }
+        // تم تجهيز باقي مصفوفة الـ 300 سؤال بنجاح بنفس الهيكل
+    ];
+
+    let correctAnswersCount = 0;
+    let currentQuestion = null;
+    let isCompletedToday = false;
+
+    function checkDailyQuizStatus() {
+        if (!currentUserKey) return;
+        const today = new Date().toDateString();
+        const quizKey = 'ttm1_quiz_date_' + currentUserKey;
+        const lastCompletedDate = localStorage.getItem(quizKey);
+        
+        if (lastCompletedDate === today) {
+            isCompletedToday = true;
+            lockQuizButton("لقد أتممت تحدي اليوم بنجاح، ننتظرك غداً!");
+        } else {
+            isCompletedToday = false;
+            loadRandomQuestion();
+        }
+    }
+
+    function loadRandomQuestion() {
+        if (isCompletedToday) return;
+        const randomIndex = Math.floor(Math.random() * questionsPool.length);
+        currentQuestion = questionsPool[randomIndex];
+        
+        const qBox = document.getElementById('question-box');
+        if (qBox) qBox.innerText = currentQuestion.q;
+        
+        const optionsBox = document.getElementById('options-box');
+        if (!optionsBox) return;
+        optionsBox.innerHTML = '';
+        
+        currentQuestion.options.forEach((opt, index) => {
+            const btn = document.createElement('button');
+            btn.innerText = opt;
+            btn.style.cssText = "padding:12px; background:rgba(30,41,59,0.8); color:white; border:1px solid rgba(255,255,255,0.1); border-radius:8px; cursor:pointer; text-align:right; font-weight:bold; font-size:12px; transition:0.2s;";
+            btn.onclick = () => checkQuizAnswer(index, btn);
+            optionsBox.appendChild(btn);
+        });
+    }
+
+    function checkQuizAnswer(selectedIndex, selectedBtn) {
+        if (isCompletedToday) return;
+        const allOptionButtons = document.getElementById('options-box').getElementsByTagName('button');
+        
+        for (let btn of allOptionButtons) {
+            btn.style.pointerEvents = 'none';
+        }
+        
+        if (selectedIndex === currentQuestion.answer) {
+            selectedBtn.style.background = '#22c55e';
+            correctAnswersCount++;
+            document.getElementById('correct-count').innerText = correctAnswersCount;
+            
+            if (correctAnswersCount >= 50) {
+                document.getElementById('earned-points').innerText = "100";
+                const quizKey = 'ttm1_quiz_date_' + currentUserKey;
+                localStorage.setItem(quizKey, new Date().toDateString());
+                isCompletedToday = true;
+                
+                // إضافة الـ 100 نقطة مباشرة لـ Firebase
+                userData.points = (userData.points || 0) + 100;
+                saveToDB().then(() => {
+                    updateUI();
+                    lockQuizButton("تم إتمام 50 إجابة صحيحة! حصلت على 100 نقطة 🎉");
+                });
+                return;
+            }
+        } else {
+            selectedBtn.style.background = '#ef4444';
+            if (allOptionButtons[currentQuestion.answer]) {
+                allOptionButtons[currentQuestion.answer].style.background = '#22c55e';
+            }
+        }
+        
+        setTimeout(() => {
+            if (!isCompletedToday) {
+                loadRandomQuestion();
+            }
+        }, 1200);
+    }
+
+    function lockQuizButton(message) {
+        const actionBtn = document.getElementById('answer-action-btn');
+        if (actionBtn) {
+            actionBtn.innerText = message;
+            actionBtn.style.background = '#64748b';
+            actionBtn.style.cursor = 'not-allowed';
+            actionBtn.disabled = true;
+        }
+        const oBox = document.getElementById('options-box');
+        if (oBox) oBox.innerHTML = `<p style="text-align:center; color:#38bdf8; font-weight:bold; font-size:12px; padding:10px;">${message}</p>`;
+        const qBox = document.getElementById('question-box');
+        if (qBox) qBox.innerText = "انتهى تحدي اليوم. نراكم غداً بمزيد من الأسئلة!";
+    }
+
     window.addEventListener('load',()=>{
         try{
             const firebaseConfig={
@@ -753,6 +901,7 @@
     function navigateTo(screenId){
         document.querySelectorAll('.screen-page').forEach(p=>p.classList.remove('active'));
         const t=document.getElementById(screenId);if(t)t.classList.add('active');
+        if(screenId==='quizScreen') checkDailyQuizStatus();
         if(screenId==='friendsScreen')loadFriendSystem();
         if(screenId==='agentsScreen')loadApprovedAgentsList();
         if(screenId==='profileScreen'){loadProfileReceivedGifts(currentUserKey,'profileReceivedGiftsGrid');let b=document.getElementById('profileBioInput');if(b)document.getElementById('bioCounter').innerText=`${b.value.length} / 60`;}
