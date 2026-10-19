@@ -382,12 +382,12 @@
             </div>
         </div>
 
-        <!-- زر قسم التحدي اليومي (بخيارين فقط) -->
+        <!-- زر قسم التحدي اليومي (50 نقطة عند إتمام الأسئلة) -->
         <div class="card" style="background:rgba(15,23,42,0.85);border:1px solid rgba(56,189,248,0.4);margin-bottom:10px;padding:10px">
             <div style="display:flex;justify-content:space-between;align-items:center">
                 <div style="text-align:right">
-                    <b style="color:#38bdf8;font-size:13px">🧠 تحدي الـ 50 سؤال (اختياران فقط)</b>
-                    <div style="font-size:10px;color:#cbd5e1;margin-top:2px">أجب عن 50 سؤالاً صحيحاً واكسب 100 نقطة يومياً!</div>
+                    <b style="color:#38bdf8;font-size:13px">🧠 تحدي الـ 100 سؤال (50 نقطة يومياً)</b>
+                    <div style="font-size:10px;color:#cbd5e1;margin-top:2px">أجب عن الأسئلة اليومية واكسب 50 نقطة!</div>
                 </div>
                 <button class="action-btn btn-blue" style="width:auto;padding:6px 14px;font-size:11px" onclick="navigateTo('quizScreen')">دخول التحدي 🚀</button>
             </div>
@@ -407,16 +407,16 @@
         </div>
     </div>
 
-    <!-- شاشة الأسئلة والتحدي اليومي بالصيغة الجديدة (بخيارين فقط) -->
+    <!-- شاشة الأسئلة والتحدي اليومي (100 سؤال - 50 نقطة) -->
     <div id="quizScreen" class="screen-page">
         <div class="top-nav">
-            <h3 style="margin:0;color:#38bdf8;font-size:15px">🧠 تحدي الأسئلة اليومي (اختياران)</h3>
+            <h3 style="margin:0;color:#38bdf8;font-size:15px">🧠 تحدي الأسئلة اليومي (100 سؤال)</h3>
             <button class="nav-btn back" onclick="navigateTo('mainScreen')">⬅️ الرئيسية</button>
         </div>
         <div id="daily-quiz-container" style="padding:15px; background:rgba(15,23,42,0.95); color:#fff; border-radius:16px; border:1px solid rgba(56,189,248,0.3); text-align:right;">
             <div id="quiz-stats" style="display:flex; justify-content:space-between; margin-bottom:15px; font-size:12px; background:rgba(30,41,59,0.8); padding:10px; border-radius:10px;">
-                <span>الإجابات الصحيحة: <strong id="correct-count" style="color:#22c55e;">0</strong> / 50</span>
-                <span>الربح اليومي: <strong id="earned-points" style="color:#eab308;">0</strong> / 100 🪙</span>
+                <span>السؤال الحالي: <strong id="question-index-text" style="color:#38bdf8;">1</strong> / 100</span>
+                <span>الربح اليومي: <strong id="earned-points" style="color:#eab308;">0</strong> / 50 🪙</span>
             </div>
 
             <div id="question-box" style="background:rgba(30,41,59,0.9); padding:15px; border-radius:10px; margin-bottom:15px; min-height:75px; display:flex; align-items:center; font-size:14px; font-weight:bold; color:#f8fafc; border:1px solid rgba(255,255,255,0.05);">
@@ -441,16 +441,14 @@
         <div class="card" style="text-align:right;background:rgba(30,41,59,0.7);border:1px solid rgba(192,132,252,0.4)">
             <div class="shop-tabs" style="margin-bottom:10px">
                 <button class="shop-tab-btn active-gold" id="lbTab1" onclick="switchLeaderboardTab('gifts')">🎁 الشحن والهدايا</button>
-                <button class="shop-tab-btn" id="lbTab2" onclick="switchLeaderboardTab('agents')">👔 نشاط الوكلاء</button>
                 <button class="shop-tab-btn" id="lbTab3" onclick="switchLeaderboardTab('wheel')">🎡 رابحي العجلة</button>
             </div>
             <div id="lbContentGifts" class="lb-pane-content"><div id="leaderboardGiftsList" style="font-size:11px;color:#cbd5e1">جاري التحميل...</div></div>
-            <div id="lbContentAgents" class="lb-pane-content" style="display:none"><div id="leaderboardAgentsList" style="font-size:11px;color:#cbd5e1">جاري التحميل...</div></div>
             <div id="lbContentWheel" class="lb-pane-content" style="display:none"><div id="leaderboardWheelList" style="font-size:11px;color:#cbd5e1">جاري التحميل...</div></div>
         </div>
     </div>
 
-    <!-- شاشة ألعاب TTM1 للتسلية بديلة الوكلاء -->
+    <!-- شاشة ألعاب TTM1 للتسلية -->
     <div id="agentsScreen" class="screen-page">
         <div class="top-nav">
             <h3 style="margin:0;color:#facc15;font-size:15px">🎮 ألعاب TTM1 للتسلية</h3>
@@ -512,22 +510,22 @@
                 <button class="shop-tab-btn" id="tabLegend" onclick="switchShopTab('legend')">الأسطوري</button>
             </div>
             <div id="shopGoldContent" class="shop-tier-content active">
-                <div class="counter-row"><div><b>عداد 100 نقطة يومياً</b><br><small style="color:#c084fc">السعر: 20.000 نقطة (6.000 د.ع)</small></div><button class="action-btn btn-gold" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(100,20000)">شراء 🛒</button></div>
-                <div class="counter-row"><div><b>عداد 200 نقطة يومياً</b><br><small style="color:#c084fc">السعر: 40.000 نقطة (12.000 د.ع)</small></div><button class="action-btn btn-gold" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(200,40000)">شراء 🛒</button></div>
-                <div class="counter-row"><div><b>عداد 500 نقطة يومياً</b><br><small style="color:#c084fc">السعر: 100.000 نقطة (30.000 د.ع)</small></div><button class="action-btn btn-gold" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(500,100000)">شراء 🛒</button></div>
-                <div class="counter-row"><div><b>عداد 1.000 نقطة يومياً</b><br><small style="color:#c084fc">السعر: 200.000 نقطة (60.000 د.ع)</small></div><button class="action-btn btn-gold" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(1000,200000)">شراء 🛒</button></div>
+                <div class="counter-row"><div><b>عداد 100 نقطة يومياً</b><br><small style="color:#c084fc">السعر: 20.000 نقطة (6.000 د.ع)</small></div><button class="action-btn btn-gold" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(100,20000, 'عداد 100 نقطة يومياً')">شراء 🛒</button></div>
+                <div class="counter-row"><div><b>عداد 200 نقطة يومياً</b><br><small style="color:#c084fc">السعر: 40.000 نقطة (12.000 د.ع)</small></div><button class="action-btn btn-gold" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(200,40000, 'عداد 200 نقطة يومياً')">شراء 🛒</button></div>
+                <div class="counter-row"><div><b>عداد 500 نقطة يومياً</b><br><small style="color:#c084fc">السعر: 100.000 نقطة (30.000 د.ع)</small></div><button class="action-btn btn-gold" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(500,100000, 'عداد 500 نقطة يومياً')">شراء 🛒</button></div>
+                <div class="counter-row"><div><b>عداد 1.000 نقطة يومياً</b><br><small style="color:#c084fc">السعر: 200.000 نقطة (60.000 د.ع)</small></div><button class="action-btn btn-gold" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(1000,200000, 'عداد 1.000 نقطة يومياً')">شراء 🛒</button></div>
             </div>
             <div id="shopDiamondContent" class="shop-tier-content">
-                <div class="counter-row"><div><b>عداد 2.000 نقطة يومياً</b><br><small style="color:#38bdf8">السعر: 400.000 نقطة (120.000 د.ع)</small></div><button class="action-btn btn-blue" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(2000,400000)">شراء 🛒</button></div>
-                <div class="counter-row"><div><b>عداد 3.000 نقطة يومياً</b><br><small style="color:#38bdf8">السعر: 600.000 نقطة (180.000 د.ع)</small></div><button class="action-btn btn-blue" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(3000,600000)">شراء 🛒</button></div>
-                <div class="counter-row"><div><b>عداد 4.000 نقطة يومياً</b><br><small style="color:#38bdf8">السعر: 800.000 نقطة (240.000 د.ع)</small></div><button class="action-btn btn-blue" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(4000,800000)">شراء 🛒</button></div>
-                <div class="counter-row"><div><b>عداد 5.000 نقطة يومياً</b><br><small style="color:#38bdf8">السعر: 1.000.000 نقطة (300.000 د.ع)</small></div><button class="action-btn btn-blue" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(5000,1000000)">شراء 🛒</button></div>
+                <div class="counter-row"><div><b>عداد 2.000 نقطة يومياً</b><br><small style="color:#38bdf8">السعر: 400.000 نقطة (120.000 د.ع)</small></div><button class="action-btn btn-blue" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(2000,400000, 'عداد 2.000 نقطة يومياً')">شراء 🛒</button></div>
+                <div class="counter-row"><div><b>عداد 3.000 نقطة يومياً</b><br><small style="color:#38bdf8">السعر: 600.000 نقطة (180.000 د.ع)</small></div><button class="action-btn btn-blue" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(3000,600000, 'عداد 3.000 نقطة يومياً')">شراء 🛒</button></div>
+                <div class="counter-row"><div><b>عداد 4.000 نقطة يومياً</b><br><small style="color:#38bdf8">السعر: 800.000 نقطة (240.000 د.ع)</small></div><button class="action-btn btn-blue" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(4000,800000, 'عداد 4.000 نقطة يومياً')">شراء 🛒</button></div>
+                <div class="counter-row"><div><b>عداد 5.000 نقطة يومياً</b><br><small style="color:#38bdf8">السعر: 1.000.000 نقطة (300.000 د.ع)</small></div><button class="action-btn btn-blue" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(5000,1000000, 'عداد 5.000 نقطة يومياً')">شراء 🛒</button></div>
             </div>
             <div id="shopLegendContent" class="shop-tier-content">
-                <div class="counter-row"><div><b>عداد 10.000 نقطة يومياً</b><br><small style="color:#a855f7">السعر: 2.000.000 نقطة (600.000 د.ع)</small></div><button class="action-btn btn-purple" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(10000,2000000)">شراء 🛒</button></div>
-                <div class="counter-row"><div><b>عداد 20.000 نقطة يومياً</b><br><small style="color:#a855f7">السعر: 4.000.000 نقطة (1.200.000 د.ع)</small></div><button class="action-btn btn-purple" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(20000,4000000)">شراء 🛒</button></div>
-                <div class="counter-row"><div><b>عداد 30.000 نقطة يومياً</b><br><small style="color:#a855f7">السعر: 6.000.000 نقطة (1.800.000 د.ع)</small></div><button class="action-btn btn-purple" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(30000,6000000)">شراء 🛒</button></div>
-                <div class="counter-row"><div><b>عداد 40.000 نقطة يومياً</b><br><small style="color:#a855f7">السعر: 8.000.000 نقطة (2.400.000 د.ع)</small></div><button class="action-btn btn-purple" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(40000,8000000)">شراء 🛒</button></div>
+                <div class="counter-row"><div><b>عداد 10.000 نقطة يومياً</b><br><small style="color:#a855f7">السعر: 2.000.000 نقطة (600.000 د.ع)</small></div><button class="action-btn btn-purple" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(10000,2000000, 'عداد 10.000 نقطة يومياً')">شراء 🛒</button></div>
+                <div class="counter-row"><div><b>عداد 20.000 نقطة يومياً</b><br><small style="color:#a855f7">السعر: 4.000.000 نقطة (1.200.000 د.ع)</small></div><button class="action-btn btn-purple" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(20000,4000000, 'عداد 20.000 نقطة يومياً')">شراء 🛒</button></div>
+                <div class="counter-row"><div><b>عداد 30.000 نقطة يومياً</b><br><small style="color:#a855f7">السعر: 6.000.000 نقطة (1.800.000 د.ع)</small></div><button class="action-btn btn-purple" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(30000,6000000, 'عداد 30.000 نقطة يومياً')">شراء 🛒</button></div>
+                <div class="counter-row"><div><b>عداد 40.000 نقطة يومياً</b><br><small style="color:#a855f7">السعر: 8.000.000 نقطة (2.400.000 د.ع)</small></div><button class="action-btn btn-purple" style="width:auto;padding:5px 12px;font-size:11px" onclick="buyCounter(40000,8000000, 'عداد 40.000 نقطة يومياً')">شراء 🛒</button></div>
             </div>
         </div>
     </div>
@@ -669,6 +667,15 @@
                 <button onclick="openAdminCounterOrders()" class="action-btn btn-gold" style="padding:8px;font-size:11px">📥 عرض طلبات شراء العدادات</button>
             </div>
         </div>
+        
+        <!-- قسم البحث عن المستخدم لمعرفة العداد والمرات التي سحب بها أرباحه -->
+        <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);padding:10px;border-radius:10px;margin-bottom:10px">
+            <h4 style="margin:0 0 6px 0;color:#10b981;font-size:12px">🔍 فحص ملف المستخدم (العدادات وسحوبات الأرباح)</h4>
+            <input type="text" id="adminInspectIdInput" class="input-box" placeholder="أدخل ID المستخدم" style="margin-bottom:6px">
+            <button class="action-btn btn-green" style="padding:8px;font-size:11px" onclick="adminInspectUser()">فحص المستخدم 🔎</button>
+            <div id="adminInspectResult" style="font-size:11px;color:#cbd5e1;margin-top:6px;background:rgba(0,0,0,0.3);padding:6px;border-radius:6px;display:none;"></div>
+        </div>
+
         <div class="shop-tabs" style="margin-bottom:8px">
             <button class="shop-tab-btn active-gold" id="admTab1" onclick="switchAdminTab('withdrawals')">طلبات السحب</button>
         </div>
@@ -840,15 +847,15 @@
 
 <script>
     let currentEmail='',currentUserKey='',rtdb=null,auth=null;
-    let userData={points:0,gems:0,lastSpinTime:0,activeCounter:'لا يوجد',activeCounterVal:0,customId:'',name:'',avatar:'',bio:'',hasCreatedRoom:false,createdRoomId:'',lastWithdrawTime:0,isBanned:false,whatsapp:''};
+    let userData={points:0,gems:0,lastSpinTime:0,activeCounter:'لا يوجد',activeCounterVal:0,customId:'',name:'',avatar:'',bio:'',hasCreatedRoom:false,createdRoomId:'',lastWithdrawTime:0,isBanned:false,whatsapp:'',withdrawCount:0};
     let base64Image='',activeChatFriendKey='',activeChatFriendName='',visitedProfileTargetKey='',timerInterval=null;
     let isolatedActiveRoomId='',currentRoomOccupantsCount=0,activeRoomCreatorKey='',globalAppSettings={withdrawLocked:false,dailyCounterLocked:false};
     let newRoomAvatarBase64='',newRoomBgBase64='';
     let currentReplyTarget=null,pendingSelectedGift=null,selectedTargetUserKey='all',selectedTargetUserName='الكل (عام)',totalWheelDegrees=0;
     let globalRoomsList = [];
 
-    // --- منطق الأسئلة والتحدي اليومي المصاغ بالكامل بخيارين فقط ---
-    const questionsPool = [
+    // --- قاعدة بيانات الأسئلة (100 سؤال متنوعة) ---
+    const fullQuestionsPool = [
         { id: 1, q: "ما هي عاصمة جمهورية العراق؟", correct: "بغداد", wrong: "البصرة" },
         { id: 2, q: "كم عدد سور القرآن الكريم؟", correct: "114 سورة", wrong: "120 سورة" },
         { id: 3, q: "في أي قارة تقع دولة تونس؟", correct: "أفريقيا", wrong: "آسيا" },
@@ -864,45 +871,142 @@
         { id: 13, q: "ما هو الكوكب الأقرب إلى الشمس؟", correct: "عطارد", wrong: "المشتري" },
         { id: 14, q: "ما هي أكبر قارة في العالم من حيث المساحة؟", correct: "آسيا", wrong: "أوروبا" },
         { id: 15, q: "كم عدد أضلاع المثلث؟", correct: "3 أضلاع", wrong: "4 أضلاع" },
-        { id: 16, q: "ما هو لسان البحر المفترس المعروف بكبر حجمه؟", correct: "الحوت الأوركا", wrong: "سمك السردين" },
+        { id: 16, q: "ما هو الحيوان المعروف بسفينة الصحراء؟", correct: "الجمل", wrong: "الحصان" },
         { id: 17, q: "ما هو الغاز الأساسي الذي يتنفسه الإنسان؟", correct: "الأكسجين", wrong: "ثاني أكسيد الكربون" },
         { id: 18, q: "كم يبلغ عدد أشهر السنة الميلادية؟", correct: "12 شهراً", wrong: "10 أشهر" },
         { id: 19, q: "ما هي عاصمة فرنسا؟", correct: "باريس", wrong: "مدريد" },
-        { id: 20, q: "أي عضو في جسم الإنسان مسؤول عن ضخ الدم؟", correct: "القلب", wrong: "المعدة" }
+        { id: 20, q: "أي عضو في جسم الإنسان مسؤول عن ضخ الدم؟", correct: "القلب", wrong: "المعدة" },
+        { id: 21, q: "ما هي عاصمة دولة الإمارات العربية المتحدة؟", correct: "أبوظبي", wrong: "دبي" },
+        { id: 22, q: "من هو خوارزمي علم الجبر؟", correct: "محمد بن موسى الخوارزمي", wrong: "ابن سينا" },
+        { id: 23, q: "كم عدد عظام جسم الإنسان البالغ؟", correct: "206 عظمة", wrong: "300 عظمة" },
+        { id: 24, q: "ما هو المعدن السائل في درجة حرارة الغرفة؟", correct: "الزئبق", wrong: "الحديد" },
+        { id: 25, q: "ما هي عاصمة دولة الكويت؟", correct: "مدينة الكويت", wrong: "الجهراء" },
+        { id: 26, q: "في أي دولة توجد اهرامات الجيزة؟", correct: "مصر", wrong: "السودان" },
+        { id: 27, q: "ما هي الدولة الأكثر سكاناً في العالم؟", correct: "الهند", wrong: "اليابان" },
+        { id: 28, q: "كم عدد اللاعبين في فريق كرة القدم الأساسي؟", correct: "11 لاعب", wrong: "7 لاعبين" },
+        { id: 29, q: "ما هي عاصمة سوريا؟", correct: "دمشق", wrong: "حلب" },
+        { id: 30, q: "من هو مؤلف كتاب البخلاء؟", correct: "الجاحظ", wrong: "المتنبي" },
+        { id: 31, q: "ما هي عاصمة الأردن؟", correct: "عمان", wrong: "إربد" },
+        { id: 32, q: "ما هو أكبر كوكب في المجموعة الشمسية؟", correct: "المشتري", wrong: "زحل" },
+        { id: 33, q: "ما هي عاصمة لبنان؟", correct: "بيروت", wrong: "طرابلس" },
+        { id: 34, q: "كم عدد أركان الإسلام؟", correct: "5 أركان", wrong: "6 أركان" },
+        { id: 35, q: "ما هي عاصمة سلطنة عمان؟", correct: "مسقط", wrong: "صلالة" },
+        { id: 36, q: "من هو أول الخلفاء الراشدين؟", correct: "أبو بكر الصديق", wrong: "عمر بن الخطاب" },
+        { id: 37, q: "ما هي عاصمة فلسطين؟", correct: "القدس", wrong: "غزة" },
+        { id: 38, q: "ما هو الحيوان المسمى بملك الغابة؟", correct: "الأسد", wrong: "النمر" },
+        { id: 39, q: "ما هي عاصمة قطر؟", correct: "الدوحة", wrong: "الخور" },
+        { id: 40, q: "كم عدد أركان الإيمان؟", correct: "6 أركان", wrong: "5 أركان" },
+        { id: 41, q: "ما هي عاصمة المغرب؟", correct: "الرباط", wrong: "الدار البيضاء" },
+        { id: 42, q: "ما هو البحر الذي يقع بين إفريقيا وأوروبا؟", correct: "البحر الأبيض المتوسط", wrong: "البحر الأحمر" },
+        { id: 43, q: "ما هي عاصمة الجزائر؟", correct: "الجزائر العاصمة", wrong: "وهران" },
+        { id: 44, q: "من هو طارق بن زياد؟", correct: "قائد عسكري إسلامي فاتح الأندلس", wrong: "شاعر جاهلي" },
+        { id: 45, q: "ما هي عاصمة ليبيا؟", correct: "طرابلس", wrong: "بنغازي" },
+        { id: 46, q: "ما هي الدولة التي تُعرف ببلاد الرافدين؟", correct: "العراق", wrong: "مصر" },
+        { id: 47, q: "ما هي عاصمة البحرين؟", correct: "المحرق", wrong: "المنامة" },
+        { id: 48, q: "ما هو أطول سور في العالم؟", correct: "سور الصين العظيم", wrong: "سور بغداد" },
+        { id: 49, q: "ما هي عاصمة السودان؟", correct: "الخرطوم", wrong: "أم درمان" },
+        { id: 50, q: "كم عدد القارات في العالم؟", correct: "7 قارات", wrong: "5 قارات" },
+        { id: 51, q: "ما هي عاصمة اليمن؟", correct: "صنعاء", wrong: "عدن" },
+        { id: 52, q: "ما هو الكوكب المسمى بالكوكب الأحمر؟", correct: "المريخ", wrong: "الزهرة" },
+        { id: 53, q: "ما هي عاصمة تونس؟", correct: "تونس", wrong: "سوسة" },
+        { id: 54, q: "من هو النبي الذي فداه الله بذبح عظيم؟", correct: "إسماعيل عليه السلام", wrong: "يوسف عليه السلام" },
+        { id: 55, q: "ما هي عاصمة إيطاليا؟", correct: "روما", wrong: "ميلانو" },
+        { id: 56, q: "ما هو الجهاز المسؤول عن التفكير في جسم الإنسان؟", correct: "الدماغ", wrong: "القلب" },
+        { id: 57, q: "ما هي عاصمة إسبانيا؟", correct: "مدريد", wrong: "برشلونة" },
+        { id: 58, q: "ما هي عاصمة ألمانيا؟", correct: "برلين", wrong: "ميونخ" },
+        { id: 59, q: "ما هي عاصمة تركيا؟", correct: "أنقرة", wrong: "إسطنبول" },
+        { id: 60, q: "من هو مكتشف أمريكا؟", correct: "كريستوفر كولومبوس", wrong: "فاسكو دا جاما" },
+        { id: 61, q: "ما هي عاصمة إيران؟", correct: "طهران", wrong: "أصفهان" },
+        { id: 62, q: "ما هو أكبر محيط في العالم؟", correct: "المحيط الهادئ", wrong: "المحيط الأطلسي" },
+        { id: 63, q: "ما هي عاصمة اليابان؟", correct: "طوكيو", wrong: "أوساكا" },
+        { id: 64, q: "كم عدد ساعات اليوم الواحد؟", correct: "24 ساعة", wrong: "12 ساعة" },
+        { id: 65, q: "ما هي عاصمة الصين؟", correct: "بكين", wrong: "شانغهاي" },
+        { id: 66, q: "ما هي عاصمة الهند؟", correct: "نيودلهي", wrong: "مومباي" },
+        { id: 67, q: "ما هي عاصمة روسيا؟", correct: "موسكو", wrong: "سان بطرسبرغ" },
+        { id: 68, q: "ما هو الحيوان الذي ينام إحدى عينيه مفتوحتين؟", correct: "الدلفين", wrong: "الأسد" },
+        { id: 69, q: "ما هي عاصمة البرازيل؟", correct: "برازيليا", wrong: "ريو دي جانيرو" },
+        { id: 70, q: "ما هو الطائر الذي يستطيع تقليد أصوات البشر؟", correct: "الببغاء", wrong: "العصفور" },
+        { id: 71, q: "ما هي عاصمة الأرجنتين؟", correct: "بوينس آيرس", wrong: "قرطبة" },
+        { id: 72, q: "ما هو أسرع طائر في العالم؟", correct: "صقر الشاهين", wrong: "النسر" },
+        { id: 73, q: "ما هي عاصمة كندا؟", correct: "أوتاوا", wrong: "تورونتو" },
+        { id: 74, q: "من هو أول من صعد إلى الفضاء؟", correct: "يوري جاجارين", wrong: "نيل أرمسترونغ" },
+        { id: 75, q: "ما هي عاصمة أستراليا؟", correct: "كانبرا", wrong: "سيدني" },
+        { id: 76, q: "كم عدد ألوان العلم العراقي؟", correct: "4 ألوان", wrong: "3 ألوان" },
+        { id: 77, q: "ما هي عاصمة اليونان؟", correct: "أثينا", wrong: "سالونيك" },
+        { id: 78, q: "ما هو الحيوان الذي يمتلك ثلاثة قلوب؟", correct: "الأخطبوط", wrong: "القرش" },
+        { id: 79, q: "ما هي عاصمة بريطانيا؟", correct: "لندن", wrong: "مانشستر" },
+        { id: 80, q: "ما هو الغاز الذي تحتاجه النباتات لعملية البناء الضوئي؟", correct: "ثاني أكسيد الكربون", wrong: "الأكسجين" },
+        { id: 81, q: "ما هي عاصمة السويد؟", correct: "ستوكهولم", wrong: "مالمو" },
+        { id: 82, q: "ما هي عاصمة النرويج؟", correct: "أوسلو", wrong: "برغن" },
+        { id: 83, q: "ما هي عاصمة سويسرا؟", correct: "برن", wrong: "زيورخ" },
+        { id: 84, q: "ما هو أكبر طائر في العالم؟", correct: "النعامة", wrong: "البطريق" },
+        { id: 85, q: "ما هي عاصمة هولندا؟", correct: "أمستردام", wrong: "روتردام" },
+        { id: 86, q: "من هو الشاعر الجاهلي صاحب المعلقة الشهيرة الملقب بالملك الضليل؟", correct: "امرؤ القيس", wrong: "زهير بن أبي سلمى" },
+        { id: 87, q: "ما هي عاصمة بلجيكا؟", correct: "بروكسل", wrong: "أنتويرب" },
+        { id: 88, q: "ما هو اسم أطول برج في العالم حالياً؟", correct: "برج خليفة", wrong: "برج إيفل" },
+        { id: 89, q: "ما هي عاصمة البرتغال؟", correct: "لشبونة", wrong: "بورتو" },
+        { id: 90, q: "كم عدد حروف الهجاء في اللغة العربية؟", correct: "28 حرفاً", wrong: "26 حرفاً" },
+        { id: 91, q: "ما هي عاصمة كوريا الجنوبية؟", correct: "سيول", wrong: "بوسان" },
+        { id: 92, q: "ما هو الحيوان الذي يُعرف بأنه أعمى لكنه حساس للصوت؟", correct: "الخلد", wrong: "الخفاش" },
+        { id: 93, q: "ما هي عاصمة المكسيك؟", correct: "مكسيكو سيتي", wrong: "كانكون" },
+        { id: 94, q: "ما هو الطائر الذي لا يمكنه الطيران ويعيش في القطب الجنوبي؟", correct: "البطريق", wrong: "النورس" },
+        { id: 95, q: "ما هي عاصمة باكستان؟", correct: "إسلام آباد", wrong: "كراتشي" },
+        { id: 96, q: "من هو مخترع المصباح الكهربائي؟", correct: "توماس إديسون", wrong: "أينشتاين" },
+        { id: 97, q: "ما هي عاصمة جنوب إفريقيا؟", correct: "بريتوريا", wrong: "كيب تاون" },
+        { id: 98, q: "ما هي عاصمة النمسا؟", correct: "فيينا", wrong: "سالزبورغ" },
+        { id: 99, q: "ما هو أصل الحصان العربي الأصيل؟", correct: "شبه الجزيرة العربية", wrong: "أوروبا" },
+        { id: 100, q: "ما هي عاصمة ماليزيا؟", correct: "كوالالمبور", wrong: "بيانغ" }
     ];
 
+    let currentDailyQuestions = [];
+    let currentQuestionIndex = 0;
     let correctAnswersCount = 0;
     let currentQuestion = null;
     let isCompletedToday = false;
-    let usedQuestionsIds = [];
 
-    function checkDailyQuizStatus() {
+    // خلط وترتيب الأسئلة عشوائياً يومياً لضمان ظهور 100 سؤال متجدد بدون تكرار
+    function initDailyQuizSession() {
         if (!currentUserKey) return;
-        const today = new Date().toDateString();
-        const quizKey = 'ttm1_quiz_date_' + currentUserKey;
-        const lastCompletedDate = localStorage.getItem(quizKey);
-        
-        if (lastCompletedDate === today) {
+        const todayStr = new Date().toDateString();
+        const sessionDateKey = 'ttm1_quiz_session_date_' + currentUserKey;
+        const storedDate = localStorage.getItem(sessionDateKey);
+
+        // إذا بدأ يوم جديد، نقوم بخلط الأسئلة الـ 100 بالكامل
+        if (storedDate !== todayStr) {
+            localStorage.setItem(sessionDateKey, todayStr);
+            let shuffled = [...fullQuestionsPool].sort(() => Math.random() - 0.5);
+            localStorage.setItem('ttm1_daily_pool_' + currentUserKey, JSON.stringify(shuffled));
+            localStorage.removeItem('ttm1_quiz_completed_' + currentUserKey);
+        }
+
+        let savedPool = localStorage.getItem('ttm1_daily_pool_' + currentUserKey);
+        if (savedPool) {
+            currentDailyQuestions = JSON.parse(savedPool);
+        } else {
+            currentDailyQuestions = [...fullQuestionsPool].sort(() => Math.random() - 0.5);
+        }
+
+        const completedToday = localStorage.getItem('ttm1_quiz_completed_' + currentUserKey);
+        if (completedToday === todayStr) {
             isCompletedToday = true;
-            lockQuizButton("لقد أتممت تحدي اليوم بنجاح، ننتظرك غداً!");
+            lockQuizButton("لقد أتممت تحدي الـ 100 سؤال بنجاح لهذا اليوم، ننتظرك غداً!");
         } else {
             isCompletedToday = false;
-            loadRandomQuestion();
+            currentQuestionIndex = 0;
+            correctAnswersCount = 0;
+            loadNextDailyQuestion();
         }
     }
 
-    function loadRandomQuestion() {
+    function loadNextDailyQuestion() {
         if (isCompletedToday) return;
 
-        let availableQuestions = questionsPool.filter(q => !usedQuestionsIds.includes(q.id));
-        if (availableQuestions.length === 0) {
-            usedQuestionsIds = [];
-            availableQuestions = questionsPool;
+        if (currentQuestionIndex >= currentDailyQuestions.length) {
+            currentQuestionIndex = currentDailyQuestions.length;
         }
 
-        const randomIndex = Math.floor(Math.random() * availableQuestions.length);
-        currentQuestion = availableQuestions[randomIndex];
-        usedQuestionsIds.push(currentQuestion.id);
+        document.getElementById('question-index-text').innerText = (currentQuestionIndex + 1);
+        currentQuestion = currentDailyQuestions[currentQuestionIndex];
 
         const qBox = document.getElementById('question-box');
         if (qBox) qBox.innerText = currentQuestion.q;
@@ -911,6 +1015,7 @@
         if (!optionsBox) return;
         optionsBox.innerHTML = '';
 
+        // خلط الخيارين (الصحيح والخطأ) عشوائياً في كل مرة
         const isCorrectFirst = Math.random() < 0.5;
         const opts = isCorrectFirst ? 
             [{ text: currentQuestion.correct, isCorrect: true }, { text: currentQuestion.wrong, isCorrect: false }] :
@@ -936,30 +1041,29 @@
         if (isCorrect) {
             selectedBtn.style.background = '#22c55e';
             correctAnswersCount++;
-            document.getElementById('correct-count').innerText = correctAnswersCount;
-
-            if (correctAnswersCount >= 50) {
-                document.getElementById('earned-points').innerText = "100";
-                const quizKey = 'ttm1_quiz_date_' + currentUserKey;
-                localStorage.setItem(quizKey, new Date().toDateString());
-                isCompletedToday = true;
-
-                userData.points = (userData.points || 0) + 100;
-                saveToDB().then(() => {
-                    updateUI();
-                    lockQuizButton("تم إتمام 50 إجابة صحيحة! حصلت على 100 نقطة 🎉");
-                });
-                return;
-            }
         } else {
             selectedBtn.style.background = '#ef4444';
         }
 
+        currentQuestionIndex++;
+
         setTimeout(() => {
-            if (!isCompletedToday) {
-                loadRandomQuestion();
+            if (currentQuestionIndex >= 100 || currentQuestionIndex >= currentDailyQuestions.length) {
+                // عند إتمام الـ 100 سؤال يمنح المستخدم 50 نقطة فقط
+                isCompletedToday = true;
+                const todayStr = new Date().toDateString();
+                localStorage.setItem('ttm1_quiz_completed_' + currentUserKey, todayStr);
+
+                userData.points = (userData.points || 0) + 50;
+                saveToDB().then(() => {
+                    updateUI();
+                    document.getElementById('earned-points').innerText = "50";
+                    lockQuizButton("أتممت الـ 100 سؤال بنجاح! حصلت على 50 نقطة مكافأة اليوم 🎉");
+                });
+            } else {
+                loadNextDailyQuestion();
             }
-        }, 1000);
+        }, 800);
     }
 
     function lockQuizButton(message) {
@@ -973,7 +1077,7 @@
         const oBox = document.getElementById('options-box');
         if (oBox) oBox.innerHTML = `<p style="grid-column:span 2; text-align:center; color:#38bdf8; font-weight:bold; font-size:12px; padding:10px;">${message}</p>`;
         const qBox = document.getElementById('question-box');
-        if (qBox) qBox.innerText = "انتهى تحدي اليوم. نراكم غداً بمزيد من الأسئلة!";
+        if (qBox) qBox.innerText = "انتهى التحدي اليومي. نراكم غداً بمزيد من الأسئلة المتجددة!";
     }
 
     window.addEventListener('load',()=>{
@@ -1012,7 +1116,7 @@
     function navigateTo(screenId){
         document.querySelectorAll('.screen-page').forEach(p=>p.classList.remove('active'));
         const t=document.getElementById(screenId);if(t)t.classList.add('active');
-        if(screenId==='quizScreen') checkDailyQuizStatus();
+        if(screenId==='quizScreen') initDailyQuizSession();
         if(screenId==='friendsScreen')loadFriendSystem();
         if(screenId==='profileScreen'){loadProfileReceivedGifts(currentUserKey,'profileReceivedGiftsGrid');let b=document.getElementById('profileBioInput');if(b)document.getElementById('bioCounter').innerText=`${b.value.length} / 60`;}
         if(screenId==='leaderboardScreen')loadLeaderboardData();
@@ -1059,7 +1163,7 @@
         rtdb.ref('users/'+currentUserKey).once('value').then(check=>{
             if(check.exists()){btn.disabled=false;btn.innerText="تأكيد الحساب ✨";return alert("⚠️ مسجل سابقاً!");}
             let defaultName=email.split('@')[0],assignedId=(email==='msaftwtn@gmail.com')?'1':Math.floor(100000+Math.random()*900000).toString();
-            const newUser={name:defaultName,email:email,password:pass,customId:assignedId,points:0,gems:0,bio:'',lastSpinTime:0,activeCounter:'لا يوجد',activeCounterVal:0,hasCreatedRoom:false,createdRoomId:'',lastWithdrawTime:0,isBanned:false,whatsapp:'',weeklyGiftsSent:0,weeklyWheelPoints:0};
+            const newUser={name:defaultName,email:email,password:pass,customId:assignedId,points:0,gems:0,bio:'',lastSpinTime:0,activeCounter:'لا يوجد',activeCounterVal:0,hasCreatedRoom:false,createdRoomId:'',lastWithdrawTime:0,isBanned:false,whatsapp:'',weeklyGiftsSent:0,weeklyWheelPoints:0,withdrawCount:0};
             rtdb.ref('users/'+currentUserKey).set(newUser).then(()=>{
                 btn.disabled=false;btn.innerText="تأكيد الحساب ✨";currentEmail=email;
                 try{localStorage.setItem('dinarUserKey',currentUserKey);}catch(e){}
@@ -1119,9 +1223,11 @@
         return rtdb.ref('users/'+currentUserKey).update(userData);
     }
     function handleLogout(){if(timerInterval)clearInterval(timerInterval);try{localStorage.removeItem('dinarUserKey');}catch(e){}currentEmail='';currentUserKey='';navigateTo('authScreen');}
-    function buyCounter(pts,price){
+    function buyCounter(pts,price, counterName){
         if((userData.points||0)<price)return alert(`❌ نقاطك غير كافية! سعر العداد ${price.toLocaleString()} نقطة.`);
-        userData.points-=price;userData.activeCounterVal=(userData.activeCounterVal||0)+pts;
+        userData.points-=price;
+        userData.activeCounterVal=(userData.activeCounterVal||0)+pts;
+        userData.activeCounter=counterName;
         saveToDB().then(()=>{updateUI();alert(`🎉 مبروك! تم شراء العداد وأصبح إجمالي إنتاجك (${userData.activeCounterVal.toLocaleString()} نقطة يومياً).`);});
     }
     
@@ -1197,18 +1303,15 @@
     }
     function switchLeaderboardTab(tab){
         document.getElementById('lbTab1').className="shop-tab-btn "+(tab==='gifts'?"active-gold":"");
-        document.getElementById('lbTab2').className="shop-tab-btn "+(tab==='agents'?"active-gold":"");
         document.getElementById('lbTab3').className="shop-tab-btn "+(tab==='wheel'?"active-gold":"");
         document.getElementById('lbContentGifts').style.display=tab==='gifts'?'block':'none';
-        document.getElementById('lbContentAgents').style.display=tab==='agents'?'block':'none';
         document.getElementById('lbContentWheel').style.display=tab==='wheel'?'block':'none';
     }
     function loadLeaderboardData(){
         rtdb.ref('users').once('value').then(snap=>{
             if(!snap.exists())return;let users=[];
-            snap.forEach(u=>{let d=u.val();users.push({key:u.key,name:d.name||'مستخدم',customId:d.customId||'---',avatar:d.avatar||'',gifts:d.weeklyGiftsSent||0,agents:0,wheel:d.weeklyWheelPoints||0});});
+            snap.forEach(u=>{let d=u.val();users.push({key:u.key,name:d.name||'مستخدم',customId:d.customId||'---',avatar:d.avatar||'',gifts:d.weeklyGiftsSent||0,wheel:d.weeklyWheelPoints||0});});
             renderLeaderboardList('leaderboardGiftsList',[...users].sort((a,b)=>b.gifts-a.gifts).slice(0,10),'gifts','نقطة مصروفة');
-            renderLeaderboardList('leaderboardAgentsList',[],'agents','قريباً');
             renderLeaderboardList('leaderboardWheelList',[...users].sort((a,b)=>b.wheel-a.wheel).slice(0,10),'wheel','نقطة مربوحة');
         });
     }
@@ -1447,6 +1550,9 @@
         let m=document.getElementById('withdrawMethod').value,acc=document.getElementById('withdrawAccount').value.trim(),amt=parseFloat(document.getElementById('withdrawAmount').value);
         if(!acc||isNaN(amt))return alert('⚠️ أدخل الحساب والمبلغ بشكل صحيح!');if(amt<10)return alert('⚠️ الحد الأدنى للسحب 10$!');
         if((userData.points||0)<10000)return alert('❌ رصيدك الحالي من النقاط لا يكفي لتقديم طلب السحب!');
+        
+        userData.withdrawCount = (userData.withdrawCount || 0) + 1;
+
         rtdb.ref(`admin_withdrawals`).push({userKey:currentUserKey,userName:userData.name,userId:userData.customId,method:m,account:acc,amount:amt,timestamp:Date.now(),status:'pending'}).then(()=>{
             userData.lastWithdrawTime=Date.now();
             saveToDB().then(()=>{closeWithdrawModal();alert('✅ تم تقديم طلب السحب للإدارة بنجاح. (تم تفعيل قفل الـ 10 أيام القادمة بنجاح)');});
@@ -1471,6 +1577,35 @@
                     alert(`✅ تم الشحن بـ ${pts} نقطة بنجاح.`);
                 });
             });
+        });
+    }
+
+    // زر فحص العداد والسحوبات داخل لوحة الإدارة للمستخدم
+    function adminInspectUser(){
+        if(currentUserKey!=='msaftwtn_gmail_com')return alert('⚠️ غير مسموح.');
+        let tId=document.getElementById('adminInspectIdInput').value.trim();
+        let resArea=document.getElementById('adminInspectResult');
+        if(!tId)return alert('⚠️ أدخل ID المستخدم الفعلي!');
+        resArea.style.display='block';
+        resArea.innerHTML="جاري جلب البيانات...";
+
+        rtdb.ref('users').once('value').then(snap=>{
+            let foundUser=null;
+            snap.forEach(c=>{
+                let u=c.val();
+                if(String(u.customId).trim()===String(tId).trim() || c.key===tId) {
+                    foundUser=u;
+                }
+            });
+            if(!foundUser){
+                resArea.innerHTML="❌ لم يتم العثور على مستخدم بهذا الـ ID.";
+                return;
+            }
+            let counterInfo = foundUser.activeCounter && foundUser.activeCounter !== 'لا يوجد' ? foundUser.activeCounter : 'لا يوجد عداد مشترك';
+            let wCount = foundUser.withdrawCount || 0;
+            resArea.innerHTML=`<b>👤 اسم المستخدم:</b> ${foundUser.name || 'بدون اسم'}<br>`+
+                              `<b>👑 نوع العداد المشترك:</b> ${counterInfo}<br>`+
+                              `<b>💸 عدد مرات سحب الأرباح:</b> ${wCount} مرة`;
         });
     }
 
